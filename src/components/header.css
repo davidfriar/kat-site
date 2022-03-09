@@ -1,0 +1,137 @@
+header {
+  background-color: var(--dark-bg-color);
+  color: var(--light-text-color);
+  text-align: center;
+  position: fixed;
+  z-index: 999999;
+  width: 100%;
+}
+
+.logo {
+  height: 50px;
+}
+
+main {
+  padding-top: 50px;
+}
+
+nav {
+  background-color: var(--dark-bg-color);
+  width: 100%;
+  position: absolute;
+  text-align: left;
+  top: 100%;
+  left: 0;
+  transform: scale(1, 0);
+  transform-origin: top;
+  transition: transform 400ms ease-in-out;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin-bottom: 1em;
+  margin-left: 1em;
+}
+
+nav a {
+  color: var(--light-text-color);
+  text-decoration: none;
+  font-size: 1.2rem; /* to do - move to typography */
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+nav a:hover {
+  font-weight: 500;
+  color: var(--light-text-color);
+}
+
+.nav-toggle:checked ~ nav {
+  transform: scale(1, 1);
+}
+
+.nav-toggle:checked ~ nav a {
+  opacity: 1;
+  transition: opacity 250ms ease-in-out 150ms;
+}
+
+.nav-toggle {
+  display: none;
+}
+
+.nav-toggle-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 1em;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  display: block;
+  background: var(--light-text-color);
+  height: 5px;
+  width: 1.5em;
+  border-radius: 2px;
+  position: relative;
+}
+
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  content: "";
+}
+
+.nav-toggle-label span::before {
+  bottom: 7px;
+}
+
+.nav-toggle-label span::after {
+  top: 3px;
+}
+
+@media screen and (min-width: 800px) {
+  .nav-toggle-label {
+    display: none;
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: 1fr auto minmax(600px, 1fr) 1fr;
+  }
+
+  .logo {
+    grid-column: 2 / span 1;
+  }
+
+  nav {
+    all: unset;
+    grid-column: 3/4;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  nav a {
+    opacity: 1;
+  }
+
+  nav li {
+    margin-bottom: 0;
+  }
+}

@@ -3,7 +3,7 @@ import { Figure } from "../components/figure"
 
 const components = {
   types: {
-    image: Figure,
+    customImage: Figure,
   },
 }
 

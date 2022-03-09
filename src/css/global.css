@@ -1,0 +1,59 @@
+:root {
+  --dark-heading-color: #070707;
+  --dark-text-color: #545454;
+  --light-text-color: white;
+  --light-bg-color: #ffd0d8;
+  --dark-bg-color: black;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--dark-bg-color);
+}
+
+.post-body {
+  max-width: 50rem;
+  margin: 0 auto;
+  /* display: flex; */
+  /* flex-direction: column; */
+  background-color: var(--light-bg-color);
+}
+
+h1,
+h2,
+h3 {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 2rem 2rem;
+  color: var(--dark-heading-color);
+}
+
+.post h1 {
+  background-color: var(--light-bg-color);
+}
+
+.post-body p {
+  padding: 0 2rem;
+  color: var(--dark-text-color);
+}
+
+.post-body figure {
+  width: 100%;
+}
+
+.post-body figure img {
+  width: 100%;
+}
+
+.post-body figure div {
+  width: 100%;
+}
+
+.post-body figcaption {
+  text-align: center;
+}

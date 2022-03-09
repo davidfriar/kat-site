@@ -18,21 +18,26 @@
   "dependencies": {
     "@portabletext/react": "^1.0.3",
     "dot-env": "^0.0.1",
-    "gatsby": "^4.7.0-alpha-ts-aot.33",
+    "gatsby": "^4.9.2",
     "gatsby-plugin-graphql-codegen": "^3.1.1",
     "gatsby-plugin-image": "^2.8.1",
     "gatsby-plugin-sharp": "^4.8.1",
+    "gatsby-plugin-typography": "^4.9.0",
     "gatsby-source-filesystem": "^4.8.1",
     "gatsby-source-sanity": "^7.3.2",
     "gatsby-transformer-sharp": "^4.8.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "ts-node": "^10.5.0"
+    "react-typography": "^0.16.20",
+    "ts-node": "^10.5.0",
+    "typography": "^0.16.21",
+    "typography-theme-irving": "^0.16.19"
   },
   "devDependencies": {
     "@types/node": "^17.0.14",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
+    "@types/typography": "^0.16.4",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-prettier": "^4.0.0",

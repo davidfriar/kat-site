@@ -1,0 +1,58 @@
+.card-list {
+  margin: 0 auto;
+  max-width: 50rem;
+}
+
+.card-list h2 {
+  padding: 1rem;
+  align-self: center;
+}
+
+.card-list ul {
+  margin: 0 1em;
+}
+
+.card-list li {
+  list-style: none;
+  margin: 1em 0;
+}
+
+.card-list-card {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  /* height: 200px; */
+}
+
+@media screen and (max-width: 600px) {
+  .card-list-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card-list a {
+  text-decoration: none;
+}
+
+.card-image {
+  grid-row: 1/3;
+  background-color: black;
+  border-style: none;
+}
+
+.card-image div {
+  background-color: black;
+  border-style: none;
+}
+
+.card-summary {
+  padding: 1em;
+  padding-top: 0;
+  align-self: top;
+}
+
+.card-title {
+  font-size: 2em;
+}

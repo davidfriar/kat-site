@@ -1,0 +1,33 @@
+.category-page h1 {
+  background-color: transparent;
+  position: relative;
+  text-align: center;
+}
+
+.category-page-body {
+  text-align: center;
+}
+
+.category-page {
+  position: relative;
+}
+
+.category-page-body {
+  position: relative;
+}
+
+.category-page *:not(.background-image) {
+  z-index: 10;
+}
+
+.category-page .card-list {
+  position: relative;
+}
+
+.category-page .background-image {
+  position: absolute;
+  top: 0px;
+  z-index: 1;
+  width: 100%;
+  /* height: 100%; */
+}

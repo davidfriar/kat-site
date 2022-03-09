@@ -36,6 +36,12 @@ const config: GatsbyConfig = {
       },
     },
     "gatsby-plugin-graphql-codegen",
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/typography/typography.ts`,
+      },
+    },
   ],
 }
 

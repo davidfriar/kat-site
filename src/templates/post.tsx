@@ -6,8 +6,12 @@ export const query = graphql`
   query PostQuery($id: String!) {
     sanityPost(id: { eq: $id }) {
       title
-      author {
-        name
+      summary
+      mainImage {
+        alt
+        asset {
+          gatsbyImageData(fit: FILLMAX)
+        }
       }
       _rawBody(resolveReferences: { maxDepth: 10 })
     }
@@ -18,15 +22,16 @@ type PostPageProps = PageProps<{ sanityPost: SanityPost }>
 const PostPage = (props: PostPageProps) => {
   const {
     data: {
-      sanityPost: { title, author, _rawBody },
+      sanityPost: { title, _rawBody },
     },
   } = props
 
   return (
-    <div>
+    <div className="post">
       <h1>{title}</h1>
-      <div>{author?.name}</div>
-      <BlockContent value={_rawBody} />
+      <div className="post-body">
+        <BlockContent value={_rawBody} />
+      </div>
     </div>
   )
 }
