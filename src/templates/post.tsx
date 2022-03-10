@@ -6,6 +6,7 @@ export const query = graphql`
   query PostQuery($id: String!) {
     sanityPost(id: { eq: $id }) {
       title
+      subtitle
       summary
       mainImage {
         alt
@@ -22,13 +23,16 @@ type PostPageProps = PageProps<{ sanityPost: SanityPost }>
 const PostPage = (props: PostPageProps) => {
   const {
     data: {
-      sanityPost: { title, _rawBody },
+      sanityPost: { title, subtitle, _rawBody },
     },
   } = props
 
   return (
     <div className="post">
-      <h1>{title}</h1>
+      <div className="post-header">
+        <h1>{title}</h1>
+        <h2>{subtitle}</h2>
+      </div>
       <div className="post-body">
         <BlockContent value={_rawBody} />
       </div>

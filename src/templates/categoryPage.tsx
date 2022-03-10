@@ -25,6 +25,7 @@ export const categoryPageQuery = graphql`
       nodes {
         id
         title
+        subtitle
         summary
         slug {
           current
@@ -52,11 +53,15 @@ const CategoryPage = (props: CategoryPageProps) => {
       allSanityPost: { nodes },
     },
   } = props
-  const PostList =
-    {
-      ["coverflow"]: Coverflow,
-      ["cardlist"]: CardList,
-    }[template as string] || CardList
+
+  const isBrowser = typeof window !== "undefined"
+
+  const PostList = !isBrowser
+    ? CardList
+    : {
+        ["coverflow"]: Coverflow,
+        ["cardlist"]: CardList,
+      }[template as string] || CardList
 
   return (
     <div className={`category-page template-${template}`}>

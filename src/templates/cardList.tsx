@@ -13,9 +13,14 @@ const CardList = ({ posts }: CardListProps) => {
               {post.mainImage ? (
                 <Image image={post.mainImage} className="card-image" />
               ) : null}
-              <h2 className="card-title">
-                <a href={`/blog/${post.slug?.current || "#"}`}>{post.title}</a>
-              </h2>
+              <div className="card-header">
+                <h2 className="card-title">
+                  <a href={`/blog/${post.slug?.current || "#"}`}>
+                    {post.title}
+                  </a>
+                </h2>
+                <h3 className="card-subtitle">{post.subtitle}</h3>
+              </div>
               <div className="card-summary">{post.summary}</div>
             </div>
           </li>
