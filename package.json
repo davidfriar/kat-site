@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@portabletext/react": "^1.0.3",
+    "@types/simple-react-lightbox": "^3.6.1",
     "dot-env": "^0.0.1",
     "gatsby": "^4.9.2",
     "gatsby-plugin-graphql-codegen": "^3.1.1",
@@ -29,7 +30,9 @@
     "react": "^17.0.1",
     "react-coverflow": "^0.2.20",
     "react-dom": "^17.0.1",
+    "react-photo-gallery": "^8.0.0",
     "react-typography": "^0.16.20",
+    "simple-react-lightbox": "^3.6.9-0",
     "ts-node": "^10.5.0",
     "typography": "^0.16.21",
     "typography-theme-irving": "^0.16.19"

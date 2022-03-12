@@ -1,0 +1,14 @@
+.gallery {
+  width: min(90vw, 1000px);
+  margin: 0 auto;
+  color: white;
+}
+
+h1,
+h2 {
+  color: white;
+}
+
+.gallery-description {
+  padding: 1em;
+}
