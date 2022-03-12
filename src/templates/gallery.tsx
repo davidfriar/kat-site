@@ -54,10 +54,12 @@ const GalleryPage = (props: GalleryPageProps) => {
     settings: {
       overlayColor: "black",
       slideAnimationType: "slide",
+      autoplaySpeed: 10000,
     },
     buttons: {
       showDownloadButton: false,
       size: "50px",
+      backgroundColor: "transparent",
     },
     thumbnails: {
       showThumbnails: false,
