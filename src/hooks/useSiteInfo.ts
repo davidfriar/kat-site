@@ -27,7 +27,7 @@ export const useSiteInfo = (): SiteInfo => {
           description
           logo {
             asset {
-              gatsbyImageData(width: 150, placeholder: NONE)
+              gatsbyImageData(width: 80, placeholder: NONE)
               id
             }
             alt
