@@ -8,15 +8,16 @@ header {
 }
 
 .logo img {
-  height: 150px;
+  height: 80px;
 }
 
 .logo {
   background-color: var(--dark-bg-color);
+  padding: 1rem;
 }
 
 main {
-  padding-top: 150px;
+  padding-top: calc(80px + 2rem);
 }
 
 nav {
@@ -39,21 +40,22 @@ nav ul {
 
 nav li {
   margin-bottom: 1em;
-  margin-left: 1em;
+  margin-right: 2em;
+  text-align: right;
 }
 
 nav a {
   color: var(--light-text-color);
   text-decoration: none;
-  font-size: 1.2rem; /* to do - move to typography */
+  font-size: 1.1rem; /* to do - move to typography */
   text-transform: uppercase;
   opacity: 0;
   transition: opacity 200ms ease-in-out;
 }
 
 nav a:hover {
-  font-weight: 500;
   color: var(--light-text-color);
+  text-shadow: 0 0 15px var(--accent-color);
 }
 
 .nav-toggle:checked ~ nav {
@@ -72,8 +74,8 @@ nav a:hover {
 .nav-toggle-label {
   position: absolute;
   top: 0;
-  left: 0;
-  margin-left: 1em;
+  right: 0;
+  margin-right: 2em;
   height: 100%;
   display: flex;
   align-items: center;
@@ -110,7 +112,7 @@ nav a:hover {
 
   header {
     display: grid;
-    grid-template-columns: 1fr auto minmax(600px, 1fr) 1fr;
+    grid-template-columns: 1fr auto minmax(650px, 1fr) 1fr;
   }
 
   .logo {
@@ -133,9 +135,30 @@ nav a:hover {
 
   nav a {
     opacity: 1;
+    position: relative;
+  }
+
+  nav a::before {
+    content: "";
+    display: block;
+    height: 5px;
+    background: var(--accent-color);
+    position: absolute;
+    border-radius: 3px;
+    bottom: -0.5em;
+    left: 0;
+    right: 0;
+    transform: scale(0, 1);
+    transition: transform ease-in-out 250ms;
+  }
+
+  nav a:hover::before {
+    transform: scale(1, 1);
   }
 
   nav li {
+    all: unset;
     margin-bottom: 0;
+    margin-left: 1em;
   }
 }

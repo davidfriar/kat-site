@@ -13,6 +13,7 @@ const Coverflow = ({ posts }: CoverflowProps) => {
         navigation={false}
         infiniteScroll={true}
         enableHeading={false}
+        clickable={true}
       >
         {posts.map((post) =>
           post.mainImage ? (
