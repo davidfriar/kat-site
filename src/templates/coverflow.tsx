@@ -3,6 +3,7 @@ import Image from "../components/image"
 import ReactCoverflow from "react-coverflow"
 import "./coverflow.css"
 import { navigate } from "gatsby"
+import useWindowDimensions from "../hooks/useWindowDimensions"
 
 type CoverflowProps = { posts: SanityPost[] }
 
@@ -15,23 +16,27 @@ const Coverflow = ({ posts }: CoverflowProps) => {
     window.open = myopen
   }
 
+  const coverflowContents = posts.map((post) =>
+    post.mainImage ? (
+      <Image
+        image={post.mainImage}
+        data-action={`/blog/${post.slug?.current}`}
+      />
+    ) : null
+  )
+
+  const { width } = useWindowDimensions()
+
   return (
-    <div className="coverflow">
+    <div className="coverflow-small">
       <ReactCoverflow
-        displayQuantityOfSide={2}
+        displayQuantityOfSide={width < 1000 ? 1 : 2}
         navigation={false}
         infiniteScroll={true}
         enableHeading={false}
-        clickable={true}
+        height={width < 600 ? 400 : undefined}
       >
-        {posts.map((post) =>
-          post.mainImage ? (
-            <Image
-              image={post.mainImage}
-              data-action={`/blog/${post.slug?.current}`}
-            />
-          ) : null
-        )}
+        {coverflowContents}
       </ReactCoverflow>
     </div>
   )
