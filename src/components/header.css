@@ -17,7 +17,9 @@ header {
 }
 
 main {
-  padding-top: calc(80px + 2rem);
+  position: absolute;
+  top: calc(80px + 2rem);
+  width: 100%;
 }
 
 nav {

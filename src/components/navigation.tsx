@@ -1,7 +1,8 @@
 import { useNavigation } from "../hooks/useNavigation"
+import { Link } from "gatsby"
 
 const Navigation = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation(false)
   return (
     <>
       <input type="checkbox" className="nav-toggle" id="nav-toggle" />
@@ -9,7 +10,7 @@ const Navigation = () => {
         <ul>
           {navigation.map((page) => (
             <li key={page.title}>
-              <a href={page.url}>{page.title}</a>
+              <Link to={page.url}>{page.title}</Link>
             </li>
           ))}
         </ul>

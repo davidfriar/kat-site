@@ -1,6 +1,7 @@
 import { SanityPost } from "../../graphql-types"
 import Image from "../components/image"
 import "./cardList.css"
+import { Link } from "gatsby"
 
 type CardListProps = { posts: SanityPost[] }
 const CardList = ({ posts }: CardListProps) => {
@@ -15,9 +16,9 @@ const CardList = ({ posts }: CardListProps) => {
               ) : null}
               <div className="card-header">
                 <h2 className="card-title">
-                  <a href={`/blog/${post.slug?.current || "#"}`}>
+                  <Link to={`/blog/${post.slug?.current || "#"}`}>
                     {post.title}
-                  </a>
+                  </Link>
                 </h2>
                 <h3 className="card-subtitle">{post.subtitle}</h3>
               </div>
