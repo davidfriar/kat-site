@@ -12,6 +12,9 @@ const DEFAULT_RATIO = 4
 const TABLET_RATIO = 3
 const MOBILE_RATIO = 2
 
+theme.omitGoogleFonts = true
+theme.googleFonts = []
+
 const typography = new Typography({
   ...theme,
   omitGoogleFonts: true,
@@ -40,4 +43,6 @@ const typography = new Typography({
     }
   },
 })
+
+console.log(typography)
 export default typography
