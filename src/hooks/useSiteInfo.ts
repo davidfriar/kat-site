@@ -1,9 +1,5 @@
 import { useStaticQuery, graphql } from "gatsby"
-import {
-  SanitySiteInfoConnection,
-  Scalars,
-  SanityImageAsset,
-} from "../../graphql-types"
+import { SanitySiteInfoConnection, SanityImageAsset } from "../../graphql-types"
 
 export type SiteInfo = {
   title: string

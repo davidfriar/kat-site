@@ -1,6 +1,5 @@
 import Typography from "typography"
 import theme from "typography-theme-irving"
-// import * as BreakPoints from 'typography-breakpoint-constants'
 import * as BreakPoints from "typography-breakpoint-constants"
 
 theme.googleFonts.push({
@@ -39,7 +38,4 @@ const typography = new Typography({
     }
   },
 })
-
-console.log(typography.toJSON())
-
 export default typography

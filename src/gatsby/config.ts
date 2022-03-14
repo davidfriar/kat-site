@@ -42,6 +42,19 @@ const config: GatsbyConfig = {
         pathToConfigModule: `src/typography/typography.ts`,
       },
     },
+    "gatsby-plugin-react-helmet",
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `beatsnrotationspm`,
+        short_name: `bnrpm`,
+        start_url: `/`,
+        background_color: `black`,
+        theme_color: `#65ffb4`,
+        display: `standalone`,
+        icon: `src/images/icon.svg`,
+      },
+    },
   ],
 }
 

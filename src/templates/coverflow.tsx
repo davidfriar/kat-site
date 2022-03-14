@@ -19,6 +19,7 @@ const Coverflow = ({ posts }: CoverflowProps) => {
   const coverflowContents = posts.map((post) =>
     post.mainImage ? (
       <Image
+        key={post.id}
         image={post.mainImage}
         data-action={`/blog/${post.slug?.current}`}
       />

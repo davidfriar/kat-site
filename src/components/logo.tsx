@@ -1,4 +1,4 @@
-import { useSiteInfo, SiteInfo } from "../hooks/useSiteInfo"
+import { useSiteInfo } from "../hooks/useSiteInfo"
 import Image from "./image"
 
 const Logo = () => {

@@ -12,6 +12,7 @@ const Navigation = () => {
         className="nav-toggle"
         checked={open}
         id="nav-toggle"
+        readOnly
       />
       <nav>
         <ul>
