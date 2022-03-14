@@ -23,6 +23,13 @@ const config: GatsbyConfig = {
         failOnError: false,
       },
     },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [`Exo\:700`, `Open Sans\:400,400i,700,700i`],
+        display: "swap",
+      },
+    },
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,

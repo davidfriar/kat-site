@@ -2,10 +2,10 @@ import Typography from "typography"
 import theme from "typography-theme-irving"
 import * as BreakPoints from "typography-breakpoint-constants"
 
-theme.googleFonts.push({
-  name: "Open Sans",
-  styles: ["400", "400i", "700", "700i"],
-})
+// theme.googleFonts.push({
+//   name: "Open Sans",
+//   styles: ["400", "400i", "700", "700i"],
+// })
 
 const newScale = (ratio: number, value: number) => Math.pow(ratio, value)
 const DEFAULT_RATIO = 4
@@ -14,9 +14,11 @@ const MOBILE_RATIO = 2
 
 const typography = new Typography({
   ...theme,
+  omitGoogleFonts: true,
   baseFontSize: "18px",
   scaleRatio: DEFAULT_RATIO,
-  bodyFontFamily: ["Open Sans"],
+  bodyFontFamily: ["Open Sans", "sans-serif"],
+  headerFontFamily: ["Exo", "sans-serif"],
   overrideThemeStyles: ({ adjustFontSizeTo }) => {
     return {
       [BreakPoints.MOBILE_MEDIA_QUERY]: {
