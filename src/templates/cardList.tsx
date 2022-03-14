@@ -10,20 +10,18 @@ const CardList = ({ posts }: CardListProps) => {
       <ul>
         {posts.map((post) => (
           <li key={post.id}>
-            <div className="card-list-card">
-              {post.mainImage ? (
-                <Image image={post.mainImage} className="card-image" />
-              ) : null}
-              <div className="card-header">
-                <h2 className="card-title">
-                  <Link to={`/blog/${post.slug?.current || "#"}`}>
-                    {post.title}
-                  </Link>
-                </h2>
-                <h3 className="card-subtitle">{post.subtitle}</h3>
+            <Link to={`/blog/${post.slug?.current || "#"}`}>
+              <div className="card-list-card">
+                {post.mainImage ? (
+                  <Image image={post.mainImage} className="card-image" />
+                ) : null}
+                <div className="card-header">
+                  <h2 className="card-title">{post.title}</h2>
+                  <h3 className="card-subtitle">{post.subtitle}</h3>
+                </div>
+                <div className="card-summary">{post.summary}</div>
               </div>
-              <div className="card-summary">{post.summary}</div>
-            </div>
+            </Link>
           </li>
         ))}
       </ul>

@@ -65,7 +65,7 @@ const CategoryPage = (props: CategoryPageProps) => {
 
   return (
     <div className={`category-page template-${template}`}>
-      <h1>{title}</h1>
+      <h1 className="category-page-title">{title}</h1>
       {mainImage ? (
         <Image image={mainImage} className="background-image" />
       ) : null}

@@ -72,6 +72,7 @@
   align-self: top;
 }
 
-.card-title {
-  font-size: 2em;
+.card-title,
+.card-subtitle {
+  color: var(dark-heading-color);
 }
