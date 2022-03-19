@@ -239,6 +239,8 @@ export type DirectoryCtimeArgs = {
 export type Site = Node & {
   buildTime?: Maybe<Scalars['Date']>;
   siteMetadata?: Maybe<SiteSiteMetadata>;
+  port?: Maybe<Scalars['Int']>;
+  host?: Maybe<Scalars['String']>;
   polyfill?: Maybe<Scalars['Boolean']>;
   pathPrefix?: Maybe<Scalars['String']>;
   jsxRuntime?: Maybe<Scalars['String']>;
@@ -637,7 +639,7 @@ export type SanityCategory_UpdatedAtArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
-export type SanityCustomImage = {
+export type SanityCustomImage = SanityImageEntity & {
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
   asset?: Maybe<SanityImageAsset>;
@@ -792,7 +794,7 @@ export type SanityHomePage_RawMainImageArgs = {
 
 export type SanityHomePageOrPage = SanityHomePage | SanityPage;
 
-export type SanityImage = {
+export type SanityImage = SanityImageEntity & {
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
   asset?: Maybe<SanityImageAsset>;
@@ -900,6 +902,7 @@ export type SanityPage = SanityDocument & Node & {
   title?: Maybe<Scalars['String']>;
   mainImage?: Maybe<SanityCustomImage>;
   slug?: Maybe<SanitySlug>;
+  pageType?: Maybe<Scalars['String']>;
   categories?: Maybe<Array<Maybe<SanityCategory>>>;
   template?: Maybe<Scalars['String']>;
   body?: Maybe<Array<Maybe<SanityBlock>>>;
@@ -1337,6 +1340,12 @@ export type SanityResolveReferencesConfiguration = {
   maxDepth: Scalars['Int'];
 };
 
+export type SanityImageEntity = {
+  asset?: Maybe<SanityImageAsset>;
+  hotspot?: Maybe<SanityImageHotspot>;
+  crop?: Maybe<SanityImageCrop>;
+};
+
 export type Query = {
   file?: Maybe<File>;
   allFile: FileConnection;
@@ -1476,6 +1485,8 @@ export type QueryAllDirectoryArgs = {
 export type QuerySiteArgs = {
   buildTime?: InputMaybe<DateQueryOperatorInput>;
   siteMetadata?: InputMaybe<SiteSiteMetadataFilterInput>;
+  port?: InputMaybe<IntQueryOperatorInput>;
+  host?: InputMaybe<StringQueryOperatorInput>;
   polyfill?: InputMaybe<BooleanQueryOperatorInput>;
   pathPrefix?: InputMaybe<StringQueryOperatorInput>;
   jsxRuntime?: InputMaybe<StringQueryOperatorInput>;
@@ -1741,6 +1752,7 @@ export type QuerySanityPageArgs = {
   title?: InputMaybe<StringQueryOperatorInput>;
   mainImage?: InputMaybe<SanityCustomImageFilterInput>;
   slug?: InputMaybe<SanitySlugFilterInput>;
+  pageType?: InputMaybe<StringQueryOperatorInput>;
   categories?: InputMaybe<SanityCategoryFilterListInput>;
   template?: InputMaybe<StringQueryOperatorInput>;
   body?: InputMaybe<SanityBlockFilterListInput>;
@@ -2748,6 +2760,8 @@ export type SiteFieldsEnum =
   | 'siteMetadata___title'
   | 'siteMetadata___description'
   | 'siteMetadata___siteUrl'
+  | 'port'
+  | 'host'
   | 'polyfill'
   | 'pathPrefix'
   | 'jsxRuntime'
@@ -2883,6 +2897,8 @@ export type SiteGroupConnectionGroupArgs = {
 export type SiteFilterInput = {
   buildTime?: InputMaybe<DateQueryOperatorInput>;
   siteMetadata?: InputMaybe<SiteSiteMetadataFilterInput>;
+  port?: InputMaybe<IntQueryOperatorInput>;
+  host?: InputMaybe<StringQueryOperatorInput>;
   polyfill?: InputMaybe<BooleanQueryOperatorInput>;
   pathPrefix?: InputMaybe<StringQueryOperatorInput>;
   jsxRuntime?: InputMaybe<StringQueryOperatorInput>;
@@ -5424,6 +5440,7 @@ export type SanityPageFieldsEnum =
   | 'slug____key'
   | 'slug____type'
   | 'slug___current'
+  | 'pageType'
   | 'categories'
   | 'categories____id'
   | 'categories____type'
@@ -5624,6 +5641,7 @@ export type SanityPageFilterInput = {
   title?: InputMaybe<StringQueryOperatorInput>;
   mainImage?: InputMaybe<SanityCustomImageFilterInput>;
   slug?: InputMaybe<SanitySlugFilterInput>;
+  pageType?: InputMaybe<StringQueryOperatorInput>;
   categories?: InputMaybe<SanityCategoryFilterListInput>;
   template?: InputMaybe<StringQueryOperatorInput>;
   body?: InputMaybe<SanityBlockFilterListInput>;
@@ -6786,7 +6804,7 @@ export type GalleryPagesQuery = { allSanityGallery: { edges: Array<{ node: { id:
 export type PagesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PagesQuery = { allSanityPage: { nodes: Array<{ id: string, slug?: { current?: string | null } | null, categories?: Array<{ id: string } | null> | null }> } };
+export type PagesQuery = { allSanityPage: { nodes: Array<{ id: string, pageType?: string | null, slug?: { current?: string | null } | null, categories?: Array<{ id: string } | null> | null }> } };
 
 export type NavigationQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6801,7 +6819,7 @@ export type PostsQuery = { allSanityPost: { nodes: Array<{ id: string, title?: s
 export type SiteInfoQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SiteInfoQueryQuery = { allSanitySiteInfo: { nodes: Array<{ keywords?: Array<string | null> | null, title?: string | null, description?: string | null, logo?: { alt?: string | null, asset?: { gatsbyImageData: any, id: string } | null } | null }> } };
+export type SiteInfoQueryQuery = { allSanitySiteInfo: { nodes: Array<{ keywords?: Array<string | null> | null, title?: string | null, description?: string | null, logo?: { alt?: string | null, asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null } | null }> } };
 
 export type CategoryPageQueryQueryVariables = Exact<{
   id: Scalars['String'];
@@ -6809,21 +6827,40 @@ export type CategoryPageQueryQueryVariables = Exact<{
 }>;
 
 
-export type CategoryPageQueryQuery = { sanityPage?: { title?: string | null, _rawBody?: any | null, template?: string | null, mainImage?: { alt?: string | null, asset?: { gatsbyImageData: any } | null } | null } | null, allSanityPost: { nodes: Array<{ id: string, title?: string | null, subtitle?: string | null, summary?: string | null, slug?: { current?: string | null } | null, mainImage?: { alt?: string | null, asset?: { gatsbyImageData: any } | null } | null }> } };
+export type CategoryPageQueryQuery = { sanityPage?: { title?: string | null, _rawBody?: any | null, template?: string | null, mainImage?: { alt?: string | null, asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null } | null } | null, allSanityPost: { nodes: Array<{ id: string, title?: string | null, subtitle?: string | null, summary?: string | null, slug?: { current?: string | null } | null, mainImage?: { alt?: string | null, asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null } | null }> } };
 
 export type GalleryQueryQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type GalleryQueryQuery = { sanityGallery?: { title?: string | null, subtitle?: string | null, _rawDescription?: any | null, images?: Array<{ alt?: string | null, asset?: { gatsbyImageData: any } | null } | null> | null } | null };
+export type GalleryQueryQuery = { sanityGallery?: { title?: string | null, subtitle?: string | null, _rawDescription?: any | null, images?: Array<{ alt?: string | null, asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null } | null> | null } | null };
+
+export type GalleryListPageQueryQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GalleryListPageQueryQuery = { sanityPage?: { title?: string | null, _rawBody?: any | null, mainImage?: { alt?: string | null, asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null } | null } | null, allSanityGallery: { nodes: Array<{ id: string, title?: string | null, subtitle?: string | null, _rawDescription?: any | null, images?: Array<{ alt?: string | null, asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null } | null> | null, slug?: { current?: string | null } | null }> } };
 
 export type PostQueryQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type PostQueryQuery = { sanityPost?: { title?: string | null, subtitle?: string | null, summary?: string | null, _rawBody?: any | null, mainImage?: { alt?: string | null, asset?: { gatsbyImageData: any } | null } | null } | null };
+export type PostQueryQuery = { sanityPost?: { title?: string | null, subtitle?: string | null, summary?: string | null, _rawBody?: any | null, mainImage?: { alt?: string | null, asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null } | null } | null };
+
+export type Image_SanityCustomImage_Fragment = { asset?: { _id?: string | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null };
+
+export type Image_SanityImage_Fragment = { asset?: { _id?: string | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null };
+
+export type ImageFragment = Image_SanityCustomImage_Fragment | Image_SanityImage_Fragment;
+
+export type ImageWithPreview_SanityCustomImage_Fragment = { asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null };
+
+export type ImageWithPreview_SanityImage_Fragment = { asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null };
+
+export type ImageWithPreviewFragment = ImageWithPreview_SanityCustomImage_Fragment | ImageWithPreview_SanityImage_Fragment;
 
 export type GatsbyImageSharpFixedFragment = { base64?: string | null, width: number, height: number, src: string, srcSet: string };
 

@@ -24,7 +24,7 @@
   position: relative;
 }
 
-.category-page .background-image {
+.background-image {
   position: absolute;
   top: 0px;
   z-index: 1;

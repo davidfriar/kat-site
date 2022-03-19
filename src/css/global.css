@@ -38,35 +38,8 @@ h3 {
   text-align: center;
 }
 
-.post-header {
-  padding: 2rem 2rem;
-  max-width: 50rem;
-  background-color: var(--light-bg-color);
-  margin: 0 auto;
-}
-
-.post-body p {
-  padding: 0 2rem;
-  color: var(--dark-text-color);
-}
-
-.post-body h4 {
-  padding: 0 2rem;
-  color: var(--dark-heading-color);
-}
-
-.post-body figure {
+img[data-lqip] {
+  object-fit: cover;
   width: 100%;
-}
-
-.post-body figure img {
-  width: 100%;
-}
-
-.post-body figure div {
-  width: 100%;
-}
-
-.post-body figcaption {
-  text-align: center;
+  height: 100%;
 }

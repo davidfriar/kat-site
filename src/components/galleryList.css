@@ -1,0 +1,9 @@
+.gallery-list,
+.gallery-list * {
+  z-index: 10;
+  position: relative;
+}
+
+.gallery-list ul {
+  list-style: none;
+}

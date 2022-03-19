@@ -1,7 +1,7 @@
 import { SanityPost } from "../../graphql-types"
-import Image from "../components/image"
 import ReactCoverflow from "react-coverflow"
 import "./coverflow.css"
+import Image from "./image"
 import { navigate } from "gatsby"
 import useWindowDimensions from "../hooks/useWindowDimensions"
 
@@ -19,9 +19,10 @@ const Coverflow = ({ posts }: CoverflowProps) => {
   const coverflowContents = posts.map((post) =>
     post.mainImage ? (
       <Image
-        key={post.id}
         image={post.mainImage}
+        key={post.id}
         data-action={`/blog/${post.slug?.current}`}
+        className="coverflow-image"
       />
     ) : null
   )
@@ -29,13 +30,13 @@ const Coverflow = ({ posts }: CoverflowProps) => {
   const { width } = useWindowDimensions()
 
   return (
-    <div className="coverflow-small">
+    <div className="coverflow">
       <ReactCoverflow
         displayQuantityOfSide={width < 1000 ? 1 : 2}
         navigation={false}
         infiniteScroll={true}
         enableHeading={false}
-        height={width < 600 ? 400 : undefined}
+        height={width < 600 ? 200 : 800}
       >
         {coverflowContents}
       </ReactCoverflow>

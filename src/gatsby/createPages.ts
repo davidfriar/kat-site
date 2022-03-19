@@ -3,7 +3,6 @@ import { resolve } from "path"
 import type {
   PostPagesQuery,
   PagesQuery,
-  SanityPage,
   GalleryPagesQuery,
 } from "../../graphql-types"
 
@@ -47,7 +46,7 @@ const createGalleryPages: GatsbyNode["createPages"] = async ({
   actions,
 }) => {
   const { createPage } = actions
-  type Result = { errors?: any; data?: GalleryQuery }
+  type Result = { errors?: any; data?: GalleryPagesQuery }
   const { errors, data }: Result = await graphql(`
     query GalleryPages {
       allSanityGallery {
@@ -65,7 +64,7 @@ const createGalleryPages: GatsbyNode["createPages"] = async ({
   if (data) {
     data.allSanityGallery.edges.forEach((edge) => {
       const { id, slug = {} } = edge.node
-      const path = `/galleries/${slug.current}/`
+      const path = `/galleries/${slug?.current}/`
       createPage({
         path: path,
         component: resolve("src/templates/gallery.tsx"),
@@ -91,6 +90,7 @@ const createOtherPages: GatsbyNode["createPages"] = async ({
             current
           }
           id
+          pageType
           categories {
             id
           }
@@ -100,11 +100,11 @@ const createOtherPages: GatsbyNode["createPages"] = async ({
   `)
   if (data) {
     data.allSanityPage.nodes.forEach((node) => {
-      const { id, slug, categories } = node
+      const { id, slug, categories, pageType } = node
       const path = `/${slug?.current}/`
       createPage({
         path: path,
-        component: resolve(`src/templates/categoryPage.tsx`),
+        component: resolve(`src/templates/${pageType}.tsx`),
         context: {
           id,
           categories: categories?.map((cat) => cat?.id),

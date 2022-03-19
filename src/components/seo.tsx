@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet"
 import { useSiteInfo } from "../hooks/useSiteInfo"
 import type { SanityCustomImage } from "../../graphql-types"
-import type { IGatsbyImageData } from "gatsby-plugin-image"
+import { imageUrl, parseImageRef } from "gatsby-plugin-sanity-image"
 
 type SEOProps = {
   title?: string | null
@@ -12,8 +12,9 @@ type SEOProps = {
 const SEO = ({ title, description, image }: SEOProps) => {
   const siteInfo = useSiteInfo()
   const desc = description || siteInfo.description
-  const imageData = image?.asset?.gatsbyImageData as IGatsbyImageData
-  const imageSrc = imageData?.images.fallback?.src
+  const imageSrc = imageUrl(image?.asset)
+  const imageInfo = image && parseImageRef(image?.asset?._id)
+
   const theTitle = title || siteInfo.title
 
   type MetaProps = JSX.IntrinsicElements["meta"]
@@ -59,11 +60,11 @@ const SEO = ({ title, description, image }: SEOProps) => {
           },
           {
             property: "og:image:width",
-            content: `${imageData.width}`,
+            content: `${imageInfo?.dimensions.width}`,
           },
           {
             property: "og:image:height",
-            content: `${imageData.height}`,
+            content: `${imageInfo?.dimensions.height}`,
           },
           {
             name: "twitter:card",

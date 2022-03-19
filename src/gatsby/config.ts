@@ -42,7 +42,30 @@ const config: GatsbyConfig = {
         overlayDrafts: !isProd,
       },
     },
-    "gatsby-plugin-graphql-codegen",
+    {
+      resolve: "gatsby-plugin-sanity-image",
+      options: {
+        ...sanity,
+        customImageTypes: ["SanityCustomImage"],
+        defaultImageConfig: {
+          quality: 75,
+          fit: "fillmax",
+          auto: "format",
+        },
+      },
+    },
+    {
+      resolve: "gatsby-plugin-graphql-codegen",
+      options: {
+        documentPaths: [
+          "./src/**/*.{ts,tsx}",
+          "./.cache/fragments/*.js",
+          "./node_modules/gatsby-*/**/*.js",
+          "./.cache/fragments/gatsby-plugin-sanity-image.js",
+        ],
+        failOnError: false,
+      },
+    },
     {
       resolve: `gatsby-plugin-typography`,
       options: {

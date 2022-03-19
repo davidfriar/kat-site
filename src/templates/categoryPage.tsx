@@ -1,8 +1,8 @@
 import { graphql, PageProps } from "gatsby"
 import { SanityPage, SanityPostConnection } from "../../graphql-types"
 import BlockContent from "../components/blockContent"
-import Coverflow from "./coverflow"
-import CardList from "./cardList"
+import Coverflow from "../components/coverflow"
+import CardList from "../components/cardList"
 import Image from "../components/image"
 import "./categoryPage.css"
 
@@ -12,10 +12,8 @@ export const categoryPageQuery = graphql`
       title
       _rawBody
       mainImage {
+        ...ImageWithPreview
         alt
-        asset {
-          gatsbyImageData(fit: FILLMAX)
-        }
       }
       template
     }
@@ -31,10 +29,8 @@ export const categoryPageQuery = graphql`
           current
         }
         mainImage {
+          ...ImageWithPreview
           alt
-          asset {
-            gatsbyImageData(fit: FILLMAX)
-          }
         }
       }
     }

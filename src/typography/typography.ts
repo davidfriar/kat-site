@@ -2,11 +2,6 @@ import Typography from "typography"
 import theme from "typography-theme-irving"
 import * as BreakPoints from "typography-breakpoint-constants"
 
-// theme.googleFonts.push({
-//   name: "Open Sans",
-//   styles: ["400", "400i", "700", "700i"],
-// })
-
 const newScale = (ratio: number, value: number) => Math.pow(ratio, value)
 const DEFAULT_RATIO = 4
 const TABLET_RATIO = 3
@@ -44,5 +39,4 @@ const typography = new Typography({
   },
 })
 
-console.log(typography)
 export default typography

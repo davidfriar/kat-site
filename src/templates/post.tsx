@@ -2,6 +2,7 @@ import { graphql, PageProps } from "gatsby"
 import { SanityPost } from "../../graphql-types"
 import BlockContent from "../components/blockContent"
 import SEO from "../components/seo"
+import "./post.css"
 
 export const query = graphql`
   query PostQuery($id: String!) {
@@ -10,10 +11,8 @@ export const query = graphql`
       subtitle
       summary
       mainImage {
+        ...ImageWithPreview
         alt
-        asset {
-          gatsbyImageData(fit: FILLMAX)
-        }
       }
       _rawBody(resolveReferences: { maxDepth: 10 })
     }

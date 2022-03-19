@@ -1,14 +1,14 @@
 import { useStaticQuery, graphql } from "gatsby"
-import { SanitySiteInfoConnection, SanityImageAsset } from "../../graphql-types"
+import {
+  SanitySiteInfoConnection,
+  SanityCustomImage,
+} from "../../graphql-types"
 
 export type SiteInfo = {
   title: string
   keywords: string[]
   description: string
-  logo: {
-    asset: SanityImageAsset | undefined | null
-    alt: string
-  }
+  logo: SanityCustomImage
 }
 
 export const useSiteInfo = (): SiteInfo => {
@@ -22,10 +22,7 @@ export const useSiteInfo = (): SiteInfo => {
           title
           description
           logo {
-            asset {
-              gatsbyImageData(width: 80, placeholder: NONE)
-              id
-            }
+            ...ImageWithPreview
             alt
           }
         }
@@ -39,10 +36,7 @@ export const useSiteInfo = (): SiteInfo => {
       keywords: (node.keywords as string[]) || [],
       title: (node.title as string) || "",
       description: (node.description as string) || "",
-      logo: {
-        asset: node.logo?.asset,
-        alt: node.logo?.alt || "",
-      },
+      logo: node.logo as SanityCustomImage,
     }
   } else {
     throw new Error("Unable to retrieve SiteInfo")

@@ -1,7 +1,7 @@
 import { SanityPost } from "../../graphql-types"
-import Image from "../components/image"
 import "./cardList.css"
 import { Link } from "gatsby"
+import Image from "./image"
 
 type CardListProps = { posts: SanityPost[] }
 const CardList = ({ posts }: CardListProps) => {

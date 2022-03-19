@@ -1,12 +1,13 @@
 import { graphql, PageProps } from "gatsby"
-import { SanityGallery } from "../../graphql-types"
+import { SanityCustomImage, SanityGallery } from "../../graphql-types"
 import BlockContent from "../components/blockContent"
 import Gallery from "react-photo-gallery"
-import { PhotoProps } from "react-photo-gallery"
-import { IGatsbyImageData } from "gatsby-plugin-image"
+import { PhotoProps, RenderImageProps } from "react-photo-gallery"
 import "./gallery.css"
 import SimpleReactLightBox from "simple-react-lightbox"
 import { SRLWrapper } from "simple-react-lightbox"
+import { imageUrl, parseImageRef } from "gatsby-plugin-sanity-image"
+import Image from "../components/image"
 
 export const query = graphql`
   query GalleryQuery($id: String!) {
@@ -15,9 +16,7 @@ export const query = graphql`
       subtitle
       _rawDescription
       images {
-        asset {
-          gatsbyImageData
-        }
+        ...ImageWithPreview
         alt
       }
     }
@@ -33,18 +32,36 @@ const GalleryPage = (props: GalleryPageProps) => {
     },
   } = props
 
-  const photos: PhotoProps[] =
+  type Photo = PhotoProps<{ image?: SanityCustomImage }>
+
+  const photos: Photo[] =
     images?.map((image) => {
-      const imageData = image?.asset?.gatsbyImageData as IGatsbyImageData
+      const {
+        dimensions: { width, height },
+      } = parseImageRef(image?.asset?._id)
       return {
-        src: imageData.images.fallback?.src as string,
-        srcSet: imageData.images.fallback?.srcSet,
-        sizes: imageData.images.fallback?.sizes,
-        width: imageData.width,
-        height: imageData.height,
+        image: image && { asset: image.asset }, // just take the asset so we can display them uncropped
+        width: width as number,
+        height: height as number,
         alt: image?.alt as string,
+        src: imageUrl(image?.asset?._id),
       }
     }) || []
+
+  type RendererType = React.ComponentType<RenderImageProps<Photo>>
+  const imageRenderer: RendererType = ({ index, left, top, photo }) => {
+    const styles = {
+      width: photo.width,
+      height: photo.height,
+      top: top,
+      left: left,
+    }
+    return (
+      <div key={index} style={styles}>
+        {photo.image && <Image image={photo.image} />}
+      </div>
+    )
+  }
 
   const targetRowHeight = (width: number) => {
     return width / 3
@@ -79,6 +96,7 @@ const GalleryPage = (props: GalleryPageProps) => {
             <Gallery
               targetRowHeight={targetRowHeight}
               photos={photos}
+              renderImage={imageRenderer}
             ></Gallery>
           </SRLWrapper>
         )}
