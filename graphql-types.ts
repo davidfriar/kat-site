@@ -757,9 +757,11 @@ export type SanityHomePage = SanityDocument & Node & {
   _key?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   mainImage?: Maybe<SanityCustomImage>;
+  backgroundImage?: Maybe<SanityCustomImage>;
   body?: Maybe<Array<Maybe<SanityBlock>>>;
   _rawBody?: Maybe<Scalars['JSON']>;
   _rawMainImage?: Maybe<Scalars['JSON']>;
+  _rawBackgroundImage?: Maybe<Scalars['JSON']>;
   id: Scalars['ID'];
   parent?: Maybe<Node>;
   children: Array<Node>;
@@ -789,6 +791,11 @@ export type SanityHomePage_RawBodyArgs = {
 
 
 export type SanityHomePage_RawMainImageArgs = {
+  resolveReferences?: InputMaybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityHomePage_RawBackgroundImageArgs = {
   resolveReferences?: InputMaybe<SanityResolveReferencesConfiguration>;
 };
 
@@ -1677,9 +1684,11 @@ export type QuerySanityHomePageArgs = {
   _key?: InputMaybe<StringQueryOperatorInput>;
   title?: InputMaybe<StringQueryOperatorInput>;
   mainImage?: InputMaybe<SanityCustomImageFilterInput>;
+  backgroundImage?: InputMaybe<SanityCustomImageFilterInput>;
   body?: InputMaybe<SanityBlockFilterListInput>;
   _rawBody?: InputMaybe<JsonQueryOperatorInput>;
   _rawMainImage?: InputMaybe<JsonQueryOperatorInput>;
+  _rawBackgroundImage?: InputMaybe<JsonQueryOperatorInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
   parent?: InputMaybe<NodeFilterInput>;
   children?: InputMaybe<NodeFilterListInput>;
@@ -4743,6 +4752,75 @@ export type SanityHomePageFieldsEnum =
   | 'mainImage____rawAsset'
   | 'mainImage____rawHotspot'
   | 'mainImage____rawCrop'
+  | 'backgroundImage____key'
+  | 'backgroundImage____type'
+  | 'backgroundImage___asset____id'
+  | 'backgroundImage___asset____type'
+  | 'backgroundImage___asset____createdAt'
+  | 'backgroundImage___asset____updatedAt'
+  | 'backgroundImage___asset____rev'
+  | 'backgroundImage___asset____key'
+  | 'backgroundImage___asset___originalFilename'
+  | 'backgroundImage___asset___label'
+  | 'backgroundImage___asset___title'
+  | 'backgroundImage___asset___description'
+  | 'backgroundImage___asset___altText'
+  | 'backgroundImage___asset___sha1hash'
+  | 'backgroundImage___asset___extension'
+  | 'backgroundImage___asset___mimeType'
+  | 'backgroundImage___asset___size'
+  | 'backgroundImage___asset___assetId'
+  | 'backgroundImage___asset___uploadId'
+  | 'backgroundImage___asset___path'
+  | 'backgroundImage___asset___url'
+  | 'backgroundImage___asset___metadata____key'
+  | 'backgroundImage___asset___metadata____type'
+  | 'backgroundImage___asset___metadata___lqip'
+  | 'backgroundImage___asset___metadata___blurHash'
+  | 'backgroundImage___asset___metadata___hasAlpha'
+  | 'backgroundImage___asset___metadata___isOpaque'
+  | 'backgroundImage___asset___metadata____rawLocation'
+  | 'backgroundImage___asset___metadata____rawDimensions'
+  | 'backgroundImage___asset___metadata____rawPalette'
+  | 'backgroundImage___asset___source____key'
+  | 'backgroundImage___asset___source____type'
+  | 'backgroundImage___asset___source___name'
+  | 'backgroundImage___asset___source___id'
+  | 'backgroundImage___asset___source___url'
+  | 'backgroundImage___asset____rawMetadata'
+  | 'backgroundImage___asset____rawSource'
+  | 'backgroundImage___asset___gatsbyImageData'
+  | 'backgroundImage___asset___id'
+  | 'backgroundImage___asset___parent___id'
+  | 'backgroundImage___asset___parent___children'
+  | 'backgroundImage___asset___children'
+  | 'backgroundImage___asset___children___id'
+  | 'backgroundImage___asset___children___children'
+  | 'backgroundImage___asset___internal___content'
+  | 'backgroundImage___asset___internal___contentDigest'
+  | 'backgroundImage___asset___internal___description'
+  | 'backgroundImage___asset___internal___fieldOwners'
+  | 'backgroundImage___asset___internal___ignoreType'
+  | 'backgroundImage___asset___internal___mediaType'
+  | 'backgroundImage___asset___internal___owner'
+  | 'backgroundImage___asset___internal___type'
+  | 'backgroundImage___hotspot____key'
+  | 'backgroundImage___hotspot____type'
+  | 'backgroundImage___hotspot___x'
+  | 'backgroundImage___hotspot___y'
+  | 'backgroundImage___hotspot___height'
+  | 'backgroundImage___hotspot___width'
+  | 'backgroundImage___crop____key'
+  | 'backgroundImage___crop____type'
+  | 'backgroundImage___crop___top'
+  | 'backgroundImage___crop___bottom'
+  | 'backgroundImage___crop___left'
+  | 'backgroundImage___crop___right'
+  | 'backgroundImage___alt'
+  | 'backgroundImage___caption'
+  | 'backgroundImage____rawAsset'
+  | 'backgroundImage____rawHotspot'
+  | 'backgroundImage____rawCrop'
   | 'body'
   | 'body____key'
   | 'body____type'
@@ -4756,6 +4834,7 @@ export type SanityHomePageFieldsEnum =
   | 'body____rawChildren'
   | '_rawBody'
   | '_rawMainImage'
+  | '_rawBackgroundImage'
   | 'id'
   | 'parent___id'
   | 'parent___parent___id'
@@ -4893,9 +4972,11 @@ export type SanityHomePageFilterInput = {
   _key?: InputMaybe<StringQueryOperatorInput>;
   title?: InputMaybe<StringQueryOperatorInput>;
   mainImage?: InputMaybe<SanityCustomImageFilterInput>;
+  backgroundImage?: InputMaybe<SanityCustomImageFilterInput>;
   body?: InputMaybe<SanityBlockFilterListInput>;
   _rawBody?: InputMaybe<JsonQueryOperatorInput>;
   _rawMainImage?: InputMaybe<JsonQueryOperatorInput>;
+  _rawBackgroundImage?: InputMaybe<JsonQueryOperatorInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
   parent?: InputMaybe<NodeFilterInput>;
   children?: InputMaybe<NodeFilterListInput>;
@@ -6805,6 +6886,11 @@ export type PagesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type PagesQuery = { allSanityPage: { nodes: Array<{ id: string, pageType?: string | null, slug?: { current?: string | null } | null, categories?: Array<{ id: string } | null> | null }> } };
+
+export type HomePageQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type HomePageQueryQuery = { allSanityHomePage: { nodes: Array<{ title?: string | null, _rawBody?: any | null, mainImage?: { alt?: string | null, asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null } | null, backgroundImage?: { alt?: string | null, asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null } | null }> } };
 
 export type NavigationQueryVariables = Exact<{ [key: string]: never; }>;
 

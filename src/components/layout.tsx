@@ -1,12 +1,12 @@
 import { ReactElement } from "react"
 import Header from "./header"
 
-type LayoutProps = { children: ReactElement }
+type LayoutProps = { children: ReactElement; isHomePage: boolean }
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children, isHomePage }: LayoutProps) => {
   return (
     <>
-      <Header />
+      <Header isHomePage={isHomePage} />
       <main>{children}</main>
     </>
   )

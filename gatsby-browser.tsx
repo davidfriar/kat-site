@@ -4,6 +4,7 @@ import Layout from "./src/components/layout"
 
 export const wrapPageElement: GatsbyBrowser["wrapPageElement"] = ({
   element,
+  props: { path },
 }) => {
-  return <Layout>{element}</Layout>
+  return <Layout isHomePage={path === "/"}>{element}</Layout>
 }

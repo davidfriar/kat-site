@@ -19,6 +19,10 @@ const typography = new Typography({
   headerFontFamily: ["Exo", "sans-serif"],
   overrideThemeStyles: ({ adjustFontSizeTo }) => {
     return {
+      [".svg-card-title, .svg-card-subtitle"]: {
+        fontFamily: "Exo, sans-serif",
+        fontWeight: "700",
+      },
       [BreakPoints.MOBILE_MEDIA_QUERY]: {
         html: {
           fontSize: `${(15 / 16) * 100}%`,

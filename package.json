@@ -16,10 +16,13 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@byteclaw/use-unique-id": "^1.0.2",
     "@portabletext/react": "^1.0.3",
+    "@react-spring/web": "^9.4.4",
     "@types/react-helmet": "^6.1.5",
     "@types/simple-react-lightbox": "^3.6.1",
     "@types/typography-breakpoint-constants": "^0.16.0",
+    "@use-gesture/react": "^10.2.10",
     "dot-env": "^0.0.1",
     "gatsby": "^4.9.2",
     "gatsby-plugin-google-fonts": "^1.0.1",
@@ -37,13 +40,16 @@
     "react-coverflow": "^0.2.20",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
+    "react-merge-refs": "^1.1.0",
     "react-photo-gallery": "^8.0.0",
+    "react-svg-path": "^1.13.3",
     "react-typography": "^0.16.20",
     "simple-react-lightbox": "^3.6.9-0",
     "ts-node": "^10.5.0",
     "typography": "^0.16.21",
     "typography-breakpoint-constants": "^0.16.19",
-    "typography-theme-irving": "^0.16.19"
+    "typography-theme-irving": "^0.16.19",
+    "use-resize-observer": "^8.0.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.14",

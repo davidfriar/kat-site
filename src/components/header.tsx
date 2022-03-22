@@ -1,14 +1,16 @@
 import "./header.css"
 import Navigation from "./navigation"
 import Logo from "./logo"
+import { Link } from "gatsby"
 
-const Header = () => {
+type HeaderProps = { isHomePage: boolean }
+const Header = ({ isHomePage }: HeaderProps) => {
   return (
     <header>
       <div className="logo">
-        <a href="/">
+        <Link to="/">
           <Logo />
-        </a>
+        </Link>
       </div>
       <Navigation />
     </header>

@@ -9,11 +9,13 @@ header {
 
 .logo img {
   width: 80px;
+  display: block;
 }
 
 .logo {
   background-color: var(--dark-bg-color);
   padding: 1rem;
+  height: calc(2rem + 80px);
 }
 
 main {
