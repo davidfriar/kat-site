@@ -13,6 +13,12 @@ export const usePosts = (): Array<SanityPost> => {
             current
           }
           title
+          subtitle
+          summary
+          mainImage {
+            ...ImageWithPreview
+            alt
+          }
         }
       }
     }

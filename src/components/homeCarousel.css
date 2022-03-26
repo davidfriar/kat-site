@@ -1,0 +1,69 @@
+.home-carousel {
+  --card-height: 300px;
+  --card-width: 200px;
+  --wheel-width: min(50vh, 90vw);
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.home-carousel .card {
+  background-color: var(--light-bg-color);
+  max-width: var(--card-width);
+  max-height: var(--card-height);
+  border-radius: 10px;
+  overflow: hidden;
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  bottom: calc(1rem + var(--wheel-width) / 2 - var(--card-height) / 2);
+  transform: rotate(30deg) translate(0, -360px);
+  box-shadow: 3px 3px 6px grey;
+}
+
+.post-summary {
+  display: none;
+}
+
+.home-carousel .post-title,
+.home-carousel .post-subtitle,
+.home-carousel .post-summary {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.home-carousel img {
+  display: block;
+}
+
+.home-carousel .post-title {
+  font-size: 1.25rem;
+}
+
+.home-carousel .post-subtitle {
+  font-size: 1rem;
+}
+
+.home-carousel .post-summary {
+  font-size: 0.75rem;
+}
+
+.carousel-wheel {
+  position: absolute;
+  width: var(--wheel-width);
+  bottom: 1rem;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
+
+.carousel-wheel img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin-bottom: 0;
+  filter: drop-shadow(0px 0px 10px black);
+}

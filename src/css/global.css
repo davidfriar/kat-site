@@ -5,6 +5,8 @@
   --light-bg-color: #ffd0d8;
   --dark-bg-color: black;
   --accent-color: #65ffb4;
+  --logo-height: 80px;
+  --header-height: calc(var(--logo-height) + 2rem);
 }
 
 *,

@@ -1,11 +1,18 @@
 import { useSpring, animated } from "@react-spring/web"
 import { useDrag } from "@use-gesture/react"
-import { useState, useCallback, useRef } from "react"
+import { useCallback, useRef } from "react"
 import useResizeObserver from "use-resize-observer"
 import mergeRefs from "react-merge-refs"
 
-type RotatableProps = {} & React.HTMLAttributes<HTMLDivElement>
-const Rotatable = ({ children, style, ...otherProps }: RotatableProps) => {
+type RotatableProps = {
+  onRotate?: (angle: number) => void
+} & React.HTMLAttributes<HTMLDivElement>
+const Rotatable = ({
+  children,
+  style,
+  onRotate,
+  ...otherProps
+}: RotatableProps) => {
   const center = useRef({ x: 0, y: 0 })
 
   const { ref, width, height } = useResizeObserver<HTMLDivElement>()
@@ -13,7 +20,7 @@ const Rotatable = ({ children, style, ...otherProps }: RotatableProps) => {
   const measuredRef = useCallback(
     (node) => {
       if (node) {
-        console.log(node.getBoundingClientRect())
+        // console.log(node.getBoundingClientRect())
         const rect: DOMRect = node.getBoundingClientRect()
         center.current = {
           x: rect.x + rect.width / 2,
@@ -33,6 +40,18 @@ const Rotatable = ({ children, style, ...otherProps }: RotatableProps) => {
 
   const normalise = (angle: number): number => {
     return ((angle % 360) + 360) % 360
+  }
+
+  const fireEvent = (angle: number, previousAngle: number) => {
+    const diff = angle - previousAngle
+    const adjustedDiff =
+      Math.abs(diff) < 180 ? diff : diff < 0 ? diff + 360 : diff - 360
+    // console.log(
+    //   `angle: ${angle} previousAngle: ${previousAngle}diff: ${diff} adjustedDiff: ${adjustedDiff}`
+    // )
+    if (onRotate) {
+      onRotate(adjustedDiff)
+    }
   }
 
   const bind = useDrag(({ xy: [x, y], memo, event }) => {
@@ -63,10 +82,19 @@ const Rotatable = ({ children, style, ...otherProps }: RotatableProps) => {
       to: { rotate: newRotation },
     })
 
-    console.log(
-      `initialRotation: ${initialRotation}, angle: ${angle}, angleOffset: ${angleOffset}, newRotation: ${newRotation}, diff: ${diff}, from: ${from?.rotate}`
-    )
-    return { initialRotation, angleOffset, previousRotation: newRotation }
+    const previousAngle = memo ? memo.previousAngle : angle
+
+    fireEvent(angle, previousAngle)
+
+    // console.log(
+    //   `initialRotation: ${initialRotation}, angle: ${angle}, angleOffset: ${angleOffset}, newRotation: ${newRotation}, diff: ${diff}, from: ${from?.rotate}`
+    // )
+    return {
+      initialRotation,
+      angleOffset,
+      previousRotation: newRotation,
+      previousAngle: angle,
+    }
   })
 
   const theStyle = {

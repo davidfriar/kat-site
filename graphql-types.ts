@@ -6900,7 +6900,7 @@ export type NavigationQuery = { allSanityNavigation: { nodes: Array<{ pages?: Ar
 export type PostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PostsQuery = { allSanityPost: { nodes: Array<{ id: string, title?: string | null, slug?: { current?: string | null } | null }> } };
+export type PostsQuery = { allSanityPost: { nodes: Array<{ id: string, title?: string | null, subtitle?: string | null, summary?: string | null, slug?: { current?: string | null } | null, mainImage?: { alt?: string | null, asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null } | null }> } };
 
 export type SiteInfoQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
