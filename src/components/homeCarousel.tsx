@@ -60,25 +60,25 @@ const HomeCarousel = ({
       opacity: 0,
       transform: `rotate(${
         (item.index - (numberShown - 1) / 2) * angle
-      }deg) translate(0px,0px)`,
+      }deg) translate3d(0px,0px, 0px)`,
     }),
     enter: (item) => ({
       opacity: 1,
       transform: `rotate(${
         (item.index - (numberShown - 1) / 2) * angle
-      }deg) translate(0px, -360px)`,
+      }deg) translate3d(0px, -360px, 0px)`,
     }),
     update: (item) => ({
       opacity: 1,
       transform: `rotate(${
         (item.index - (numberShown - 1) / 2) * angle
-      }deg) translate(0px, -360px)`,
+      }deg) translate3d(0px, -360px,0px)`,
     }),
     leave: (item) => ({
       opacity: 0,
       transform: `rotate(${
         (item.index - (numberShown - 1) / 2) * angle
-      }deg) translate(0px, 0px)`,
+      }deg) translate3(0px, 0px,0px)`,
     }),
     // config: config.molasses,
     key: (item: CarouselItem) => item.post.title,
