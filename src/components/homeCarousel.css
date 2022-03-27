@@ -1,7 +1,7 @@
 .home-carousel {
-  --card-height: 300px;
-  --card-width: 200px;
-  --wheel-width: min(50vh, 90vw);
+  --card-height: 35vh;
+  --card-width: 25vh;
+  --wheel-width: min(50vh, 95vw);
   position: relative;
   margin: 0 auto;
   width: 100%;
@@ -11,16 +11,17 @@
 
 .home-carousel .card {
   background-color: var(--light-bg-color);
-  max-width: var(--card-width);
-  max-height: var(--card-height);
+  width: var(--card-width);
+  height: var(--card-height);
   border-radius: 10px;
   overflow: hidden;
   position: absolute;
   margin: 0 auto;
   left: 0;
   right: 0;
-  bottom: calc(1rem + var(--wheel-width) / 2 - var(--card-height) / 2);
-  transform: rotate(30deg) translate(0, -360px);
+  bottom: 5vh;
+  /* bottom: calc(1rem + var(--wheel-width) / 2 - var(--card-height) / 2); */
+  /* transform: rotate(30deg) translate(0, -360px); */
   box-shadow: 3px 3px 6px grey;
 }
 
@@ -58,6 +59,7 @@
   margin: 0 auto;
   left: 0;
   right: 0;
+  z-index: 100;
 }
 
 .carousel-wheel img {

@@ -6,6 +6,7 @@ import { useTransition, animated, config } from "@react-spring/web"
 import record from "../img/record.svg"
 import Rotatable from "../components/rotatable"
 import { Link } from "gatsby"
+import useWindowDimensions from "../hooks/useWindowDimensions"
 
 type HomeCarouselProps = {
   posts: SanityPost[]
@@ -33,7 +34,11 @@ const HomeCarousel = ({
   numberShown = 3,
   angle = 30,
 }: HomeCarouselProps) => {
+  const { height: windowHeight } = useWindowDimensions()
+  const cardTranslation = windowHeight ? `-${windowHeight * 0.45}px` : "350px"
+
   const [first, setFirst] = useState(0)
+  const [reverseAnimation, setReverseAnimation] = useState(false)
   const visiblePosts = take(numberShown, first, posts).map((post, index) => ({
     post,
     index,
@@ -45,6 +50,7 @@ const HomeCarousel = ({
     totalAngle += wheelAngle
     // console.log(`angle: ${wheelAngle} totalAngle: ${totalAngle}`)
     if (Math.abs(totalAngle) > angle) {
+      setReverseAnimation(totalAngle < 0)
       setFirst((first) => {
         const newValue = first - Math.trunc(totalAngle / angle)
         const n = posts.length
@@ -55,43 +61,50 @@ const HomeCarousel = ({
     }
   }
 
-  const transitions = useTransition(visiblePosts, {
-    from: (item) => ({
-      opacity: 0,
-      transform: `rotate(${
-        (item.index - (numberShown - 1) / 2) * angle
-      }deg) translate3d(0px,0px, 0px)`,
-    }),
-    enter: (item) => ({
-      opacity: 1,
-      transform: `rotate(${
-        (item.index - (numberShown - 1) / 2) * angle
-      }deg) translate3d(0px, -360px, 0px)`,
-    }),
-    update: (item) => ({
-      opacity: 1,
-      transform: `rotate(${
-        (item.index - (numberShown - 1) / 2) * angle
-      }deg) translate3d(0px, -360px,0px)`,
-    }),
-    leave: (item) => ({
-      opacity: 0,
-      transform: `rotate(${
-        (item.index - (numberShown - 1) / 2) * angle
-      }deg) translate3(0px, 0px,0px)`,
-    }),
-    // config: config.molasses,
-    key: (item: CarouselItem) => item.post.title,
-    trail: 100,
-    expires: 100,
-  })
+  const transitions = useTransition(
+    reverseAnimation ? visiblePosts.reverse() : visiblePosts,
+    {
+      from: (item) => ({
+        opacity: 0,
+        transform: `rotate(${
+          (item.index - (numberShown - 1) / 2) * angle
+        }deg) translate3d(0px,0px, 0px)`,
+      }),
+      enter: (item) => ({
+        opacity: 1,
+        transform: `rotate(${
+          (item.index - (numberShown - 1) / 2) * angle
+        }deg) translate3d(0px, ${cardTranslation}, 0px)`,
+      }),
+      update: (item) => ({
+        opacity: 1,
+        transform: `rotate(${
+          (item.index - (numberShown - 1) / 2) * angle
+        }deg) translate3d(0px, ${cardTranslation},0px)`,
+      }),
+      leave: (item) => ({
+        opacity: 0,
+        transform: `rotate(${
+          (item.index - (numberShown - 1) / 2) * angle
+        }deg) translate3(0px, 0px,0px)`,
+      }),
+      // config: config.molasses,
+      key: (item: CarouselItem) => item.post.title,
+      trail: 50,
+      expires: 100,
+    }
+  )
 
   return (
     <div className="home-carousel">
-      {transitions((style, { post }) => {
+      {transitions((style, { post, index }) => {
+        const theStyle = {
+          ...style,
+          zIndex: index,
+        }
         return (
           <Link to={`/blog/${post.slug?.current || "#"}`}>
-            <animated.div className="card" style={style}>
+            <animated.div className="card" style={theStyle}>
               <h2 className="post-title">{post.title}</h2>
               <h3 className="post-subtitle">{post.subtitle}</h3>
               <div className="post-summary">{post.summary}</div>
