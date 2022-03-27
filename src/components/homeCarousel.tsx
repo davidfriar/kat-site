@@ -105,16 +105,16 @@ const HomeCarousel = ({
         return (
           <Link to={`/blog/${post.slug?.current || "#"}`}>
             <animated.div className="card" style={theStyle}>
-              <h2 className="post-title">{post.title}</h2>
-              <h3 className="post-subtitle">{post.subtitle}</h3>
-              <div className="post-summary">{post.summary}</div>
-              {post.mainImage ? (
-                <Image
-                  image={post.mainImage}
-                  width={200}
-                  className="card-image"
-                />
-              ) : null}
+              <div className="card-text">
+                <h2 className="card-title">{post.title}</h2>
+                <h3 className="card-subtitle">{post.subtitle}</h3>
+                <div className="card-summary">{post.summary}</div>
+              </div>
+              <div className="card-image">
+                {post.mainImage ? (
+                  <Image image={post.mainImage} width={200} />
+                ) : null}
+              </div>
             </animated.div>
           </Link>
         )
