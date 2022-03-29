@@ -13,6 +13,10 @@ const SEO = ({ title, description, image }: SEOProps) => {
   const siteInfo = useSiteInfo()
   const desc = description || siteInfo.description
   const imageSrc = imageUrl(image?.asset)
+  const twitterImageSrc =
+    imageSrc &&
+    imageSrc.split("?")[0] + "?w=800&h=400&fit=min&notencoding=myarse"
+  console.log(twitterImageSrc)
   const imageInfo = image && parseImageRef(image?.asset?._id)
 
   const theTitle = title || siteInfo.title
@@ -55,11 +59,11 @@ const SEO = ({ title, description, image }: SEOProps) => {
     imageSrc
       ? [
           {
-            property: "og:image",
-            content: imageSrc,
+            property: "twitter:image",
+            content: twitterImageSrc,
           },
           {
-            property: "twitter:image",
+            property: "og:image",
             content: imageSrc,
           },
           {
@@ -83,7 +87,14 @@ const SEO = ({ title, description, image }: SEOProps) => {
         ]
   )
 
-  return <Helmet title={theTitle} htmlAttributes={{ lang: "en" }} meta={meta} />
+  return (
+    <Helmet
+      title={theTitle}
+      htmlAttributes={{ lang: "en" }}
+      meta={meta}
+      encodeSpecialCharacters={false}
+    />
+  )
 }
 
 export default SEO
