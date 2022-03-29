@@ -2,6 +2,7 @@ import { graphql, PageProps } from "gatsby"
 import { SanityPost } from "../../graphql-types"
 import BlockContent from "../components/blockContent"
 import SEO from "../components/seo"
+import Social from "../components/social"
 import "./post.css"
 
 export const query = graphql`
@@ -25,6 +26,7 @@ const PostPage = (props: PostPageProps) => {
     data: {
       sanityPost: { title, subtitle, summary, mainImage, _rawBody },
     },
+    location,
   } = props
 
   return (
@@ -38,6 +40,7 @@ const PostPage = (props: PostPageProps) => {
         <div className="post-body">
           <BlockContent value={_rawBody} />
         </div>
+        <Social link={location.href} />
       </div>
     </>
   )

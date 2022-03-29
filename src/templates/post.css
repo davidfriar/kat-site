@@ -1,8 +1,11 @@
-.post-header {
-  padding: 2rem 2rem;
+.post {
   max-width: 50rem;
   background-color: var(--light-bg-color);
   margin: 0 auto;
+}
+
+.post-header {
+  padding: 2rem 2rem;
 }
 
 .post-body p {
