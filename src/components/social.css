@@ -26,8 +26,8 @@
 .social svg {
   fill: var(--dark-text-color) !important;
   stroke: var(--dark-text-color) !important;
-  width: 24px;
-  height: 24px;
+  width: 32px !important;
+  height: 32px !important;
   display: block;
   margin: 0;
   flex: 1;
