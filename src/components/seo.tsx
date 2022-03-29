@@ -59,6 +59,10 @@ const SEO = ({ title, description, image }: SEOProps) => {
             content: imageSrc,
           },
           {
+            property: "twitter:image",
+            content: imageSrc,
+          },
+          {
             property: "og:image:width",
             content: `${imageInfo?.dimensions.width}`,
           },
