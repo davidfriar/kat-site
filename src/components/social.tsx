@@ -1,8 +1,12 @@
 import "./social.css"
 import { Twitter, Facebook, Tumblr, Pinterest } from "react-social-sharing"
+import { SanityCustomImage } from "../../graphql-types"
+import { imageUrl } from "gatsby-plugin-sanity-image"
 
-type SocialProps = { link: string }
-const Social = ({ link }: SocialProps) => {
+type SocialProps = { link: string; image?: SanityCustomImage }
+const Social = ({ link, image }: SocialProps) => {
+  const imageSrc = image && imageUrl(image?.asset)
+  console.log(`imagesrc: ${imageSrc} image: ${image}`)
   return (
     <div className="social">
       <ul>
@@ -16,7 +20,7 @@ const Social = ({ link }: SocialProps) => {
           <Tumblr simple link={link} />
         </li>
         <li>
-          <Pinterest simple link={link} />
+          <Pinterest simple link={link} media={imageSrc} />
         </li>
       </ul>
     </div>

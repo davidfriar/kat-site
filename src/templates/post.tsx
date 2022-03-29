@@ -40,7 +40,7 @@ const PostPage = (props: PostPageProps) => {
         <div className="post-body">
           <BlockContent value={_rawBody} />
         </div>
-        <Social link={location.href} />
+        <Social link={location.href} image={mainImage!} />
       </div>
     </>
   )

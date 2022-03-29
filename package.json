@@ -42,7 +42,7 @@
     "react-helmet": "^6.1.0",
     "react-merge-refs": "^1.1.0",
     "react-photo-gallery": "^8.0.0",
-    "react-social-sharing": "^3.3.0",
+    "react-social-sharing": "davidfriar/react-social-sharing",
     "react-svg-path": "^1.13.3",
     "react-typography": "^0.16.20",
     "simple-react-lightbox": "^3.6.9-0",
