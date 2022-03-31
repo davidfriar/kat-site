@@ -1,5 +1,6 @@
 import { SanityCustomImage, Maybe } from "../../graphql-types"
 import { imageUrl } from "gatsby-plugin-sanity-image"
+import useWindowDimensions from "../hooks/useWindowDimensions"
 
 type BackgroundImageProps = {
   image: Maybe<SanityCustomImage>
@@ -15,11 +16,14 @@ const BackGroundImage = ({
   children,
   ...otherProps
 }: BackgroundImageProps) => {
+  const { width: windowWidth } = useWindowDimensions()
+
   const params = {
-    width: width,
+    width: width ? width : windowWidth,
     height: height,
   }
-  const src = imageUrl(image, params)
+  const src = image && image.asset ? imageUrl(image, params) : null
+
   const theStyle = {
     ...style,
     backgroundImage: `url(${src})`,

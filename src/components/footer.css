@@ -1,0 +1,9 @@
+footer {
+  background-color: var(--dark-bg-color);
+  color: var(--light-text-color);
+  max-width: var(--max-page-width);
+  margin: 0 auto;
+  padding-left: 1em;
+  height: var(--footer-height);
+  text-align: center;
+}

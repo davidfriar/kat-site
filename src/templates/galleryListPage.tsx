@@ -2,7 +2,7 @@ import "./galleryListPage.css"
 import { graphql, PageProps } from "gatsby"
 import { SanityPage, SanityGalleryConnection } from "../../graphql-types"
 import BlockContent from "../components/blockContent"
-import Image from "../components/image"
+import BackgroundImage from "../components/backgroundImage"
 import GalleryList from "../components/galleryList"
 
 export const galleryListPageQuery = graphql`
@@ -46,16 +46,13 @@ const GalleryListPage = (props: GalleryListPageProps) => {
   } = props
 
   return (
-    <div className="gallery-list-page">
+    <BackgroundImage className="gallery-list-page" image={mainImage!}>
       <h1 className="gallery-list-page-title">{title}</h1>
-      {mainImage ? (
-        <Image image={mainImage} className="background-image" />
-      ) : null}
       <div className="gallery-list-page-body">
         <BlockContent value={_rawBody} />
       </div>
       <GalleryList galleries={nodes} />
-    </div>
+    </BackgroundImage>
   )
 }
 export default GalleryListPage

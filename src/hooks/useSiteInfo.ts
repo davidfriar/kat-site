@@ -9,6 +9,7 @@ export type SiteInfo = {
   keywords: string[]
   description: string
   logo: SanityCustomImage
+  footer: string
 }
 
 export const useSiteInfo = (): SiteInfo => {
@@ -25,6 +26,7 @@ export const useSiteInfo = (): SiteInfo => {
             ...ImageWithPreview
             alt
           }
+          footer
         }
       }
     }
@@ -37,6 +39,7 @@ export const useSiteInfo = (): SiteInfo => {
       title: (node.title as string) || "",
       description: (node.description as string) || "",
       logo: node.logo as SanityCustomImage,
+      footer: node.footer as string,
     }
   } else {
     throw new Error("Unable to retrieve SiteInfo")

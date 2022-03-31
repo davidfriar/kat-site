@@ -239,8 +239,6 @@ export type DirectoryCtimeArgs = {
 export type Site = Node & {
   buildTime?: Maybe<Scalars['Date']>;
   siteMetadata?: Maybe<SiteSiteMetadata>;
-  port?: Maybe<Scalars['Int']>;
-  host?: Maybe<Scalars['String']>;
   polyfill?: Maybe<Scalars['Boolean']>;
   pathPrefix?: Maybe<Scalars['String']>;
   jsxRuntime?: Maybe<Scalars['String']>;
@@ -907,6 +905,8 @@ export type SanityPage = SanityDocument & Node & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  navigationTitle?: Maybe<Scalars['String']>;
+  subtitle?: Maybe<Scalars['String']>;
   mainImage?: Maybe<SanityCustomImage>;
   slug?: Maybe<SanitySlug>;
   pageType?: Maybe<Scalars['String']>;
@@ -1298,6 +1298,7 @@ export type SanitySiteInfo = SanityDocument & Node & {
   _key?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
+  footer?: Maybe<Scalars['String']>;
   keywords?: Maybe<Array<Maybe<Scalars['String']>>>;
   author?: Maybe<Scalars['String']>;
   logo?: Maybe<SanityCustomImage>;
@@ -1492,8 +1493,6 @@ export type QueryAllDirectoryArgs = {
 export type QuerySiteArgs = {
   buildTime?: InputMaybe<DateQueryOperatorInput>;
   siteMetadata?: InputMaybe<SiteSiteMetadataFilterInput>;
-  port?: InputMaybe<IntQueryOperatorInput>;
-  host?: InputMaybe<StringQueryOperatorInput>;
   polyfill?: InputMaybe<BooleanQueryOperatorInput>;
   pathPrefix?: InputMaybe<StringQueryOperatorInput>;
   jsxRuntime?: InputMaybe<StringQueryOperatorInput>;
@@ -1759,6 +1758,8 @@ export type QuerySanityPageArgs = {
   _rev?: InputMaybe<StringQueryOperatorInput>;
   _key?: InputMaybe<StringQueryOperatorInput>;
   title?: InputMaybe<StringQueryOperatorInput>;
+  navigationTitle?: InputMaybe<StringQueryOperatorInput>;
+  subtitle?: InputMaybe<StringQueryOperatorInput>;
   mainImage?: InputMaybe<SanityCustomImageFilterInput>;
   slug?: InputMaybe<SanitySlugFilterInput>;
   pageType?: InputMaybe<StringQueryOperatorInput>;
@@ -1903,6 +1904,7 @@ export type QuerySanitySiteInfoArgs = {
   _key?: InputMaybe<StringQueryOperatorInput>;
   title?: InputMaybe<StringQueryOperatorInput>;
   description?: InputMaybe<StringQueryOperatorInput>;
+  footer?: InputMaybe<StringQueryOperatorInput>;
   keywords?: InputMaybe<StringQueryOperatorInput>;
   author?: InputMaybe<StringQueryOperatorInput>;
   logo?: InputMaybe<SanityCustomImageFilterInput>;
@@ -2769,8 +2771,6 @@ export type SiteFieldsEnum =
   | 'siteMetadata___title'
   | 'siteMetadata___description'
   | 'siteMetadata___siteUrl'
-  | 'port'
-  | 'host'
   | 'polyfill'
   | 'pathPrefix'
   | 'jsxRuntime'
@@ -2906,8 +2906,6 @@ export type SiteGroupConnectionGroupArgs = {
 export type SiteFilterInput = {
   buildTime?: InputMaybe<DateQueryOperatorInput>;
   siteMetadata?: InputMaybe<SiteSiteMetadataFilterInput>;
-  port?: InputMaybe<IntQueryOperatorInput>;
-  host?: InputMaybe<StringQueryOperatorInput>;
   polyfill?: InputMaybe<BooleanQueryOperatorInput>;
   pathPrefix?: InputMaybe<StringQueryOperatorInput>;
   jsxRuntime?: InputMaybe<StringQueryOperatorInput>;
@@ -5449,6 +5447,8 @@ export type SanityPageFieldsEnum =
   | '_rev'
   | '_key'
   | 'title'
+  | 'navigationTitle'
+  | 'subtitle'
   | 'mainImage____key'
   | 'mainImage____type'
   | 'mainImage___asset____id'
@@ -5720,6 +5720,8 @@ export type SanityPageFilterInput = {
   _rev?: InputMaybe<StringQueryOperatorInput>;
   _key?: InputMaybe<StringQueryOperatorInput>;
   title?: InputMaybe<StringQueryOperatorInput>;
+  navigationTitle?: InputMaybe<StringQueryOperatorInput>;
+  subtitle?: InputMaybe<StringQueryOperatorInput>;
   mainImage?: InputMaybe<SanityCustomImageFilterInput>;
   slug?: InputMaybe<SanitySlugFilterInput>;
   pageType?: InputMaybe<StringQueryOperatorInput>;
@@ -6648,6 +6650,7 @@ export type SanitySiteInfoFieldsEnum =
   | '_key'
   | 'title'
   | 'description'
+  | 'footer'
   | 'keywords'
   | 'author'
   | 'logo____key'
@@ -6857,6 +6860,7 @@ export type SanitySiteInfoFilterInput = {
   _key?: InputMaybe<StringQueryOperatorInput>;
   title?: InputMaybe<StringQueryOperatorInput>;
   description?: InputMaybe<StringQueryOperatorInput>;
+  footer?: InputMaybe<StringQueryOperatorInput>;
   keywords?: InputMaybe<StringQueryOperatorInput>;
   author?: InputMaybe<StringQueryOperatorInput>;
   logo?: InputMaybe<SanityCustomImageFilterInput>;
@@ -6895,7 +6899,7 @@ export type HomePageQueryQuery = { allSanityHomePage: { nodes: Array<{ title?: s
 export type NavigationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type NavigationQuery = { allSanityNavigation: { nodes: Array<{ pages?: Array<{ title?: string | null } | { title?: string | null, slug?: { current?: string | null } | null } | null> | null }> } };
+export type NavigationQuery = { allSanityNavigation: { nodes: Array<{ pages?: Array<{ title?: string | null } | { title?: string | null, navigationTitle?: string | null, slug?: { current?: string | null } | null } | null> | null }> } };
 
 export type PostsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6905,7 +6909,7 @@ export type PostsQuery = { allSanityPost: { nodes: Array<{ id: string, title?: s
 export type SiteInfoQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SiteInfoQueryQuery = { allSanitySiteInfo: { nodes: Array<{ keywords?: Array<string | null> | null, title?: string | null, description?: string | null, logo?: { alt?: string | null, asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null } | null }> } };
+export type SiteInfoQueryQuery = { allSanitySiteInfo: { nodes: Array<{ keywords?: Array<string | null> | null, title?: string | null, description?: string | null, footer?: string | null, logo?: { alt?: string | null, asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null } | null }> } };
 
 export type CategoryPageQueryQueryVariables = Exact<{
   id: Scalars['String'];
@@ -6935,6 +6939,13 @@ export type PostQueryQueryVariables = Exact<{
 
 
 export type PostQueryQuery = { sanityPost?: { title?: string | null, subtitle?: string | null, summary?: string | null, _rawBody?: any | null, mainImage?: { alt?: string | null, asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null } | null } | null };
+
+export type SimplePageQueryQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type SimplePageQueryQuery = { sanityPage?: { title?: string | null, subtitle?: string | null, _rawBody?: any | null, mainImage?: { alt?: string | null, asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null } | null } | null };
 
 export type Image_SanityCustomImage_Fragment = { asset?: { _id?: string | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null };
 

@@ -1,3 +1,6 @@
 .coverflow img {
   object-fit: cover;
 }
+
+.coverflow {
+}

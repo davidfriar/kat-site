@@ -17,12 +17,13 @@ const typography = new Typography({
   scaleRatio: DEFAULT_RATIO,
   bodyFontFamily: ["Open Sans", "sans-serif"],
   headerFontFamily: ["Exo", "sans-serif"],
-  overrideThemeStyles: ({ adjustFontSizeTo }) => {
+  overrideThemeStyles: ({ adjustFontSizeTo, scale }) => {
     return {
       [".svg-card-title, .svg-card-subtitle"]: {
         fontFamily: "Exo, sans-serif",
         fontWeight: "700",
       },
+      footer: scale(-2 / 5),
       [BreakPoints.MOBILE_MEDIA_QUERY]: {
         html: {
           fontSize: `${(15 / 16) * 100}%`,
@@ -42,5 +43,7 @@ const typography = new Typography({
     }
   },
 })
+
+console.log(typography.toJSON())
 
 export default typography

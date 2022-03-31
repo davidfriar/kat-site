@@ -7,6 +7,11 @@
   --accent-color: #65ffb4;
   --logo-height: 80px;
   --header-height: calc(var(--logo-height) + 2rem);
+  --footer-height: 1.5em;
+  --min-main-height: calc(
+    100vh - (var(--header-height) + var(--footer-height))
+  );
+  --max-page-width: 50rem;
 }
 
 *,
@@ -21,14 +26,6 @@ html {
 
 body {
   background-color: var(--dark-bg-color);
-}
-
-.post-body {
-  max-width: 50rem;
-  margin: 0 auto;
-  /* display: flex; */
-  /* flex-direction: column; */
-  background-color: var(--light-bg-color);
 }
 
 h1,

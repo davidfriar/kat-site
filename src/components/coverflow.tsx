@@ -27,16 +27,19 @@ const Coverflow = ({ posts }: CoverflowProps) => {
     ) : null
   )
 
-  const { width } = useWindowDimensions()
+  const { width: windowWidth, height: windowHeight } = useWindowDimensions()
 
   return (
     <div className="coverflow">
       <ReactCoverflow
-        displayQuantityOfSide={width < 1000 ? 1 : 2}
+        displayQuantityOfSide={
+          windowWidth < 1000 ? 1 : windowWidth < 1200 ? 2 : 3
+        }
         navigation={false}
         infiniteScroll={true}
         enableHeading={false}
-        height={width < 600 ? 200 : 800}
+        // height={windowWidth < 600 ? 200 : 900}
+        height={windowHeight * 0.75}
       >
         {coverflowContents}
       </ReactCoverflow>

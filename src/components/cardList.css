@@ -1,6 +1,7 @@
 .card-list {
   margin: 0 auto;
   max-width: 50rem;
+  padding-bottom: 1rem;
 }
 
 .card-title,

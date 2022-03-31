@@ -1,5 +1,5 @@
 .post {
-  max-width: 50rem;
+  max-width: var(--max-page-width);
   background-color: var(--light-bg-color);
   margin: 0 auto;
 }
@@ -8,6 +8,11 @@
   padding: 2rem 2rem;
 }
 
+.post-body {
+  max-width: var(--max-page-width);
+  margin: 0 auto;
+  background-color: var(--light-bg-color);
+}
 .post-body p {
   padding: 0 2rem;
   color: var(--dark-text-color);

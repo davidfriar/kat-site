@@ -34,6 +34,7 @@ export const useNavigation = (
             }
             ... on SanityPage {
               title
+              navigationTitle
               slug {
                 current
               }
@@ -53,7 +54,9 @@ export const useNavigation = (
     .map((page) => {
       if (isPage(page)) {
         return {
-          title: page.title as string,
+          title: (page.navigationTitle
+            ? page.navigationTitle
+            : page.title) as string,
           url: `/${page.slug?.current as string}`,
         }
       } else if (isHomePage(page)) {

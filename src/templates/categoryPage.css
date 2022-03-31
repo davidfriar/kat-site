@@ -1,35 +1,13 @@
-.category-page h1 {
-  background-color: transparent;
-  position: relative;
-  text-align: center;
-}
-
-.category-page-body {
-  text-align: center;
-}
-
 .category-page {
-  position: relative;
+  min-height: var(--min-main-height);
+}
+.category-page h1 {
+  text-align: center;
+  padding-top: 2rem;
 }
 
 .category-page-body {
-  position: relative;
-}
-
-.category-page *:not(.background-image) {
-  z-index: 10;
-}
-
-.category-page .card-list {
-  position: relative;
-}
-
-.background-image {
-  position: absolute;
-  top: 0px;
-  z-index: 1;
-  width: 100%;
-  /* height: 100%; */
+  text-align: center;
 }
 
 .category-page-title,

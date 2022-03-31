@@ -1,13 +1,5 @@
 .gallery-list-page {
-  z-index: 10;
-  position: relative;
-}
-
-.gallery-list-page-body,
-.gallery-list-page-list,
-.gallery-list-page-title {
-  z-index: 10;
-  position: relative;
+  min-height: var(--min-main-height);
 }
 
 .gallery-list-page,
@@ -16,4 +8,9 @@
 }
 
 .gallery-list-page-title {
+  padding-top: 2rem;
+}
+
+.gallery-list-page-body {
+  text-align: center;
 }

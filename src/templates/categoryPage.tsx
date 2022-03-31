@@ -3,7 +3,7 @@ import { SanityPage, SanityPostConnection } from "../../graphql-types"
 import BlockContent from "../components/blockContent"
 import Coverflow from "../components/coverflow"
 import CardList from "../components/cardList"
-import Image from "../components/image"
+import BackgroundImage from "../components/backgroundImage"
 import "./categoryPage.css"
 
 export const categoryPageQuery = graphql`
@@ -60,16 +60,16 @@ const CategoryPage = (props: CategoryPageProps) => {
       }[template as string] || CardList
 
   return (
-    <div className={`category-page template-${template}`}>
+    <BackgroundImage
+      className={`category-page template-${template}`}
+      image={mainImage!}
+    >
       <h1 className="category-page-title">{title}</h1>
-      {mainImage ? (
-        <Image image={mainImage} className="background-image" />
-      ) : null}
       <div className="category-page-body">
         <BlockContent value={_rawBody} />
       </div>
       <PostList posts={nodes} />
-    </div>
+    </BackgroundImage>
   )
 }
 

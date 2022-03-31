@@ -3,6 +3,7 @@ header {
   color: var(--light-text-color);
   text-align: center;
   position: fixed;
+  top: 0;
   z-index: 999;
   width: 100%;
 }
@@ -20,8 +21,7 @@ header {
 }
 
 main {
-  position: absolute;
-  top: var(--header-height);
+  margin-top: var(--header-height);
   width: 100%;
 }
 
@@ -30,7 +30,7 @@ nav {
   width: 100%;
   position: absolute;
   text-align: left;
-  top: 100%;
+  top: var(--header-height);
   left: 0;
   transform: scale(1, 0);
   transform-origin: top;
@@ -78,12 +78,9 @@ nav a:hover {
 
 .nav-toggle-label {
   position: absolute;
-  top: 0;
-  right: 0;
-  margin-right: 2em;
-  height: 100%;
-  display: flex;
-  align-items: center;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 2em;
 }
 
 .nav-toggle-label span,
@@ -128,7 +125,7 @@ nav a:hover {
     all: unset;
     grid-column: 3/4;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
   }
 
@@ -136,6 +133,7 @@ nav a:hover {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    margin-top: 0;
   }
 
   nav a {
