@@ -6,7 +6,7 @@ export const usePosts = (): Array<SanityPost> => {
     allSanityPost: SanityPostConnection
   }>(graphql`
     query Posts {
-      allSanityPost {
+      allSanityPost(sort: { fields: publishedAt, order: DESC }) {
         nodes {
           id
           slug {

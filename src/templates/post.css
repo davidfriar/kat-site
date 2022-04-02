@@ -38,3 +38,8 @@
 .post-body figcaption {
   text-align: center;
 }
+
+.post-date {
+  text-align: right;
+  padding: 0 2rem;
+}

@@ -29,6 +29,18 @@ function take<T>(n: number, first: number, items: T[], infinite = true): T[] {
   return firstChunk.concat(secondChunk)
 }
 
+function circularOrder<T>(items: T[]) {
+  const result: T[] = []
+  items.forEach((item, index) => {
+    if (index % 2 == 0) {
+      result[index / 2] = item
+    } else {
+      result[items.length - (index + 1) / 2] = item
+    }
+  })
+  return result
+}
+
 const HomeCarousel = ({
   posts,
   numberShown = 3,
@@ -37,12 +49,14 @@ const HomeCarousel = ({
   const { height: windowHeight } = useWindowDimensions()
   const cardTranslation = windowHeight ? `-${windowHeight * 0.45}px` : "350px"
 
-  const [first, setFirst] = useState(0)
+  const [first, setFirst] = useState(posts.length - Math.floor(numberShown / 2))
   const [reverseAnimation, setReverseAnimation] = useState(false)
-  const visiblePosts = take(numberShown, first, posts).map((post, index) => ({
-    post,
-    index,
-  }))
+  const visiblePosts = take(numberShown, first, circularOrder(posts)).map(
+    (post, index) => ({
+      post,
+      index,
+    })
+  )
 
   let totalAngle = 0
 

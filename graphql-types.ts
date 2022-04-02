@@ -239,6 +239,8 @@ export type DirectoryCtimeArgs = {
 export type Site = Node & {
   buildTime?: Maybe<Scalars['Date']>;
   siteMetadata?: Maybe<SiteSiteMetadata>;
+  port?: Maybe<Scalars['Int']>;
+  host?: Maybe<Scalars['String']>;
   polyfill?: Maybe<Scalars['Boolean']>;
   pathPrefix?: Maybe<Scalars['String']>;
   jsxRuntime?: Maybe<Scalars['String']>;
@@ -1493,6 +1495,8 @@ export type QueryAllDirectoryArgs = {
 export type QuerySiteArgs = {
   buildTime?: InputMaybe<DateQueryOperatorInput>;
   siteMetadata?: InputMaybe<SiteSiteMetadataFilterInput>;
+  port?: InputMaybe<IntQueryOperatorInput>;
+  host?: InputMaybe<StringQueryOperatorInput>;
   polyfill?: InputMaybe<BooleanQueryOperatorInput>;
   pathPrefix?: InputMaybe<StringQueryOperatorInput>;
   jsxRuntime?: InputMaybe<StringQueryOperatorInput>;
@@ -2771,6 +2775,8 @@ export type SiteFieldsEnum =
   | 'siteMetadata___title'
   | 'siteMetadata___description'
   | 'siteMetadata___siteUrl'
+  | 'port'
+  | 'host'
   | 'polyfill'
   | 'pathPrefix'
   | 'jsxRuntime'
@@ -2906,6 +2912,8 @@ export type SiteGroupConnectionGroupArgs = {
 export type SiteFilterInput = {
   buildTime?: InputMaybe<DateQueryOperatorInput>;
   siteMetadata?: InputMaybe<SiteSiteMetadataFilterInput>;
+  port?: InputMaybe<IntQueryOperatorInput>;
+  host?: InputMaybe<StringQueryOperatorInput>;
   polyfill?: InputMaybe<BooleanQueryOperatorInput>;
   pathPrefix?: InputMaybe<StringQueryOperatorInput>;
   jsxRuntime?: InputMaybe<StringQueryOperatorInput>;
@@ -6938,7 +6946,7 @@ export type PostQueryQueryVariables = Exact<{
 }>;
 
 
-export type PostQueryQuery = { sanityPost?: { title?: string | null, subtitle?: string | null, summary?: string | null, _rawBody?: any | null, mainImage?: { alt?: string | null, asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null } | null } | null };
+export type PostQueryQuery = { sanityPost?: { title?: string | null, subtitle?: string | null, summary?: string | null, publishedAt?: any | null, _rawBody?: any | null, mainImage?: { alt?: string | null, asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null } | null } | null };
 
 export type SimplePageQueryQueryVariables = Exact<{
   id: Scalars['String'];

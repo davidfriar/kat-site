@@ -16,9 +16,7 @@ const SEO = ({ title, description, image }: SEOProps) => {
   const twitterImageSrc =
     imageSrc &&
     imageSrc.split("?")[0] + "?w=800&h=400&fit=min&notencoding=myarse"
-  console.log(twitterImageSrc)
   const imageInfo = image && parseImageRef(image?.asset?._id)
-
   const theTitle = title || siteInfo.title
 
   type MetaProps = JSX.IntrinsicElements["meta"]

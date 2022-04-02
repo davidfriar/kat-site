@@ -11,6 +11,7 @@ export const query = graphql`
       title
       subtitle
       summary
+      publishedAt(formatString: "Do MMMM YYYY")
       mainImage {
         ...ImageWithPreview
         alt
@@ -24,7 +25,14 @@ type PostPageProps = PageProps<{ sanityPost: SanityPost }>
 const PostPage = (props: PostPageProps) => {
   const {
     data: {
-      sanityPost: { title, subtitle, summary, mainImage, _rawBody },
+      sanityPost: {
+        title,
+        subtitle,
+        summary,
+        publishedAt,
+        mainImage,
+        _rawBody,
+      },
     },
     location,
   } = props
@@ -38,6 +46,7 @@ const PostPage = (props: PostPageProps) => {
           <h2>{subtitle}</h2>
         </div>
         <div className="post-body">
+          <h5 className="post-date">{publishedAt}</h5>
           <BlockContent value={_rawBody} />
         </div>
         <Social link={location.href} image={mainImage!} />

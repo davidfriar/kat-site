@@ -6,7 +6,6 @@ import { imageUrl } from "gatsby-plugin-sanity-image"
 type SocialProps = { link: string; image?: SanityCustomImage }
 const Social = ({ link, image }: SocialProps) => {
   const imageSrc = image && imageUrl(image?.asset)
-  console.log(`imagesrc: ${imageSrc} image: ${image}`)
   return (
     <div className="social">
       <ul>

@@ -19,6 +19,7 @@ export const categoryPageQuery = graphql`
     }
     allSanityPost(
       filter: { categories: { elemMatch: { id: { in: $categories } } } }
+      sort: { fields: publishedAt, order: DESC }
     ) {
       nodes {
         id
