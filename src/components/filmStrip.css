@@ -1,14 +1,31 @@
 .film-strip {
+  --film-strip-image-width: 280px;
+  --film-strip-image-height: calc(var(--film-strip-image-width) * 2 / 3);
+  --hole-size: 16px;
+  --film-strip-color: rgb(34, 22, 3);
+  --text-color: rgb(255, 156, 50);
   width: calc(60vw + 50px);
   margin: 0 auto;
   opacity: 0.75;
-  --film-strip-color: rgb(34, 22, 3);
   box-shadow: 0px 22px 70px 4px black;
+  overflow: hidden;
+  counter-reset: frame;
 }
 
 .film-strip-frame {
-  width: 15vw;
-  height: 10vw;
+  /* width: 15vw; */
+  /* height: 10vw; */
+  width: var(--film-strip-image-width);
+  height: var(--film-strip-image-height);
+  position: relative;
+}
+
+.film-strip-frame::after {
+  counter-increment: frame;
+  content: counter(frame);
+  position: absolute;
+  bottom: -1.33em;
+  right: 1em;
 }
 
 .film-strip li {
@@ -22,6 +39,24 @@
   display: flex;
   gap: 10px;
   margin-left: 10px;
+  margin-bottom: 0px;
+}
+
+.film-strip-title {
+  /* text-align: center; */
+  margin-left: 2em;
+  margin-bottom: -15px !important;
+  color: var(--text-color);
+  text-transform: uppercase;
+}
+
+.film-strip-title,
+.film-strip-frame:after {
+  color: var(--text-color);
+  font-size: 0.7em;
+  font-family: "Averia Sans Libre";
+  font-weight: 700;
+  text-shadow: 0px 0px 5px red;
 }
 
 .film-strip-image {
@@ -37,40 +72,40 @@
 }
 
 .film-strip {
-  /* --background: rgb(76, 45, 3); */
   --background: var(--film-strip-color);
-  --size: 0.75vw;
   background-image: linear-gradient(
       to right,
-      var(--background) var(--size),
-      transparent var(--size)
+      var(--background) var(--hole-size),
+      transparent var(--hole-size)
     ),
     linear-gradient(
       to bottom,
-      var(--background) var(--size),
-      transparent var(--size)
+      var(--background) var(--hole-size),
+      transparent var(--hole-size)
     ),
     linear-gradient(
       to right,
-      var(--background) var(--size),
-      transparent var(--size)
+      var(--background) var(--hole-size),
+      transparent var(--hole-size)
     ),
     linear-gradient(
       to bottom,
-      var(--background) var(--size),
-      transparent var(--size)
+      var(--background) var(--hole-size),
+      transparent var(--hole-size)
     ),
     linear-gradient(
       to bottom,
-      transparent var(--size),
-      var(--background) var(--size)
+      transparent var(--hole-size),
+      var(--background) var(--hole-size)
     );
-  background-size: calc(var(--size) * 2) var(--size),
-    calc(var(--size) * 2) var(--size), calc(var(--size) * 2) var(--size),
-    calc(var(--size) * 2) var(--size), 100% calc(100% - var(--size) * 3);
+  background-size: calc(var(--hole-size) * 2) var(--hole-size),
+    calc(var(--hole-size) * 2) var(--hole-size),
+    calc(var(--hole-size) * 2) var(--hole-size),
+    calc(var(--hole-size) * 2) var(--hole-size),
+    100% calc(100% - var(--hole-size) * 3);
   background-repeat: repeat-x;
-  background-position: 0 var(--size), top left, 0 calc(100% - var(--size)),
-    bottom left, 0 var(--size);
-  padding: calc(var(--size) * 3) 0;
+  background-position: 0 var(--hole-size), top left,
+    0 calc(100% - var(--hole-size)), bottom left, 0 var(--hole-size);
+  padding: calc(var(--hole-size) * 3) 0;
   box-sizing: border-box;
 }

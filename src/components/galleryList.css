@@ -7,3 +7,10 @@
 .gallery-list ul {
   list-style: none;
 }
+.gallery-list li {
+  cursor: pointer;
+}
+
+.gallery-list a {
+  text-decoration: none;
+}

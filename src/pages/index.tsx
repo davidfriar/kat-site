@@ -17,21 +17,3 @@ const HomePage = () => {
 }
 
 export default HomePage
-
-// <SVGCard
-//   title="My Lovely Title"
-//   subtitle="This is an awesome subtitle"
-//   summary="This is where the summary goes. Will it fit?"
-//   width={1000}
-//   height={500}
-//   angle={120}
-//   radius={500}
-//   className="svg-card"
-// />
-//
-//
-// {posts.map((post) => (
-//   <li key={post.id}>
-//     <Link to={`/blog/${post.slug?.current}`}>{post.title}</Link>
-//   </li>
-// ))}

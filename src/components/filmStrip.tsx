@@ -9,6 +9,8 @@ type FilmStripProps = {
 }
 
 const FilmStrip = ({ images, title, max = 4 }: FilmStripProps) => {
+  // const imageHeight = max === 4 ? 200 : 400
+  // const imageWidth = imageHeight * 1.5
   return (
     <div className="film-strip">
       <ul>
@@ -29,6 +31,7 @@ const FilmStrip = ({ images, title, max = 4 }: FilmStripProps) => {
           )
         })}
       </ul>
+      <p className="film-strip-title">{title}</p>
     </div>
   )
 }

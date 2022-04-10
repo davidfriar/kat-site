@@ -10,7 +10,7 @@ const isProd = process.env.NODE_ENV === "production"
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `kat-site`,
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl: `https://beatsnrotationspm.com/`,
   },
   plugins: [
     {
@@ -26,7 +26,11 @@ const config: GatsbyConfig = {
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [`Exo\:700`, `Open Sans\:400,400i,700,700i`],
+        fonts: [
+          `Exo\:700`,
+          `Open Sans\:400,400i,700,700i`,
+          `Averia Sans Libre\:400`,
+        ],
         display: "swap",
       },
     },
@@ -54,18 +58,18 @@ const config: GatsbyConfig = {
         },
       },
     },
-    {
-      resolve: "gatsby-plugin-graphql-codegen",
-      options: {
-        documentPaths: [
-          "./src/**/*.{ts,tsx}",
-          "./.cache/fragments/*.js",
-          "./node_modules/gatsby-*/**/*.js",
-          "./.cache/fragments/gatsby-plugin-sanity-image.js",
-        ],
-        failOnError: false,
-      },
-    },
+    // {
+    // resolve: "gatsby-plugin-graphql-codegen",
+    // options: {
+    //   documentPaths: [
+    //     "./src/**/*.{ts,tsx}",
+    //     "./.cache/fragments/*.js",
+    //     "./node_modules/gatsby-*/**/*.js",
+    //     "./.cache/fragments/gatsby-plugin-sanity-image.js",
+    //   ],
+    //   failOnError: false,
+    // },
+    // },
     {
       resolve: `gatsby-plugin-typography`,
       options: {
@@ -83,6 +87,37 @@ const config: GatsbyConfig = {
         theme_color: `#65ffb4`,
         display: `standalone`,
         icon: `src/images/icon.svg`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        query: `
+            {
+               allSitePage {
+                 nodes {
+                   path
+                 }
+               }
+            }
+           `,
+        resolvePages: ({ allSitePage: { nodes: allPages } }: any) => {
+          return allPages.map((page: any) => {
+            return { ...page }
+          })
+        },
+        resolveSiteUrl: () => "https://beatsnrotationspm.com",
+        serialize: ({ path }: any) => {
+          return {
+            url: path,
+          }
+        },
+      },
+    },
+    {
+      resolve: "gatsby-plugin-goatcounter",
+      options: {
+        code: "bnrpm",
       },
     },
   ],
