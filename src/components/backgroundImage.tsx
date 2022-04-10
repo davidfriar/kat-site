@@ -24,11 +24,13 @@ const BackGroundImage = ({
   }
   const src = image && image.asset ? imageUrl(image, params) : null
 
-  const theStyle = {
-    ...style,
-    backgroundImage: `url(${src})`,
-    backgroundSize: "cover",
-  }
+  const theStyle = src
+    ? {
+        ...style,
+        backgroundImage: `url(${src})`,
+        backgroundSize: "cover",
+      }
+    : style
 
   return (
     <div style={theStyle} {...otherProps}>

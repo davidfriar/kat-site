@@ -1,10 +1,16 @@
 .gallery-list-page {
   min-height: var(--min-main-height);
+  background-color: #faf2dc;
+  color: var(--dark-text-color);
+  background-image: linear-gradient(#faf2cc, #b9b396);
 }
 
-.gallery-list-page,
+.gallery-list {
+  padding-bottom: 2rem;
+}
+
 .gallery-list-page-title {
-  color: var(--light-text-color);
+  color: var(--dark-heading-color);
 }
 
 .gallery-list-page-title {
