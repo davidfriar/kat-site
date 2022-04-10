@@ -15,7 +15,7 @@ export const galleryListPageQuery = graphql`
         alt
       }
     }
-    allSanityGallery {
+    allSanityGallery(sort: { fields: _updatedAt, order: DESC }) {
       nodes {
         id
         title
