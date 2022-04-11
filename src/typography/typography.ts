@@ -24,6 +24,7 @@ const typography = new Typography({
         fontWeight: "700",
       },
       footer: scale(-2 / 5),
+      figcaption: scale(-1 / 5),
       [BreakPoints.MOBILE_MEDIA_QUERY]: {
         html: {
           fontSize: `${(15 / 16) * 100}%`,
