@@ -1,5 +1,15 @@
 import type { GatsbyConfig } from "gatsby"
 
+if (process.env.STAGING) {
+  require("dotenv").config({
+    path: `.env.staging`,
+  })
+} else {
+  require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`,
+  })
+}
+
 const sanity = {
   projectId: process.env.GATSBY_SANITY_PROJECT_ID || "n1f1x37f",
   dataset: process.env.GATSBY_SANITY_DATASET || "production",
@@ -117,7 +127,7 @@ const config: GatsbyConfig = {
     {
       resolve: "gatsby-plugin-goatcounter",
       options: {
-        code: "bnrpm",
+        code: process.env.GOATCOUNTER_CODE,
       },
     },
   ],
