@@ -1,10 +1,37 @@
 .film-strip {
   --film-strip-image-width: 280px;
+
+  width: calc(var(--film-strip-image-width) + 20px);
+}
+
+@media screen and (min-width: 600px) {
+  .film-strip {
+    --film-strip-image-width: 230px;
+    width: calc(var(--film-strip-image-width) * 2 + 30px);
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .film-strip {
+    --film-strip-image-width: 220px;
+    width: calc(var(--film-strip-image-width) * 3 + 40px);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .film-strip {
+    --film-strip-image-width: 250px;
+    width: calc(var(--film-strip-image-width) * 4 + 50px);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+}
+.film-strip {
   --film-strip-image-height: calc(var(--film-strip-image-width) * 2 / 3);
   --hole-size: 16px;
   --film-strip-color: rgb(34, 22, 3);
   --text-color: rgb(255, 156, 50);
-  width: calc(60vw + 50px);
   margin: 0 auto;
   opacity: 0.75;
   box-shadow: 0px 22px 70px 4px black;

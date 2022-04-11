@@ -20,3 +20,7 @@
 .gallery-list-page-body {
   text-align: center;
 }
+
+.gallery-list ul {
+  margin-left: 0px;
+}
