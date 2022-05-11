@@ -1,0 +1,19 @@
+.portfolio-page {
+  min-height: var(--min-main-height);
+}
+
+.portfolio-page h1 {
+  padding-top: 2rem;
+  text-align: center;
+}
+
+.portfolio-page-body {
+  max-width: var(--max-page-width);
+  margin: 1rem auto;
+}
+
+.portfolio-page-title,
+.portfolio-page-subtitle,
+.portfolio-page-body {
+  color: var(--light-text-color);
+}

@@ -740,6 +740,8 @@ export type SanityGallery_RawSlugArgs = {
   resolveReferences?: InputMaybe<SanityResolveReferencesConfiguration>;
 };
 
+export type SanityGalleryOrPost = SanityGallery | SanityPost;
+
 export type SanityGeopoint = {
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
@@ -827,6 +829,18 @@ export type SanityImage_RawCropArgs = {
   resolveReferences?: InputMaybe<SanityResolveReferencesConfiguration>;
 };
 
+export type SanityInternalLink = {
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  reference?: Maybe<SanityGalleryOrPost>;
+  _rawReference?: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityInternalLink_RawReferenceArgs = {
+  resolveReferences?: InputMaybe<SanityResolveReferencesConfiguration>;
+};
+
 export type SanityMediaTag = SanityDocument & Node & {
   _id?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
@@ -909,14 +923,16 @@ export type SanityPage = SanityDocument & Node & {
   title?: Maybe<Scalars['String']>;
   navigationTitle?: Maybe<Scalars['String']>;
   subtitle?: Maybe<Scalars['String']>;
-  mainImage?: Maybe<SanityCustomImage>;
-  slug?: Maybe<SanitySlug>;
   pageType?: Maybe<Scalars['String']>;
+  mainImage?: Maybe<SanityCustomImage>;
+  photos?: Maybe<Array<Maybe<SanityCustomImage>>>;
+  slug?: Maybe<SanitySlug>;
   categories?: Maybe<Array<Maybe<SanityCategory>>>;
   template?: Maybe<Scalars['String']>;
   body?: Maybe<Array<Maybe<SanityBlock>>>;
   _rawBody?: Maybe<Scalars['JSON']>;
   _rawMainImage?: Maybe<Scalars['JSON']>;
+  _rawPhotos?: Maybe<Scalars['JSON']>;
   _rawSlug?: Maybe<Scalars['JSON']>;
   _rawCategories?: Maybe<Scalars['JSON']>;
   id: Scalars['ID'];
@@ -948,6 +964,11 @@ export type SanityPage_RawBodyArgs = {
 
 
 export type SanityPage_RawMainImageArgs = {
+  resolveReferences?: InputMaybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityPage_RawPhotosArgs = {
   resolveReferences?: InputMaybe<SanityResolveReferencesConfiguration>;
 };
 
@@ -1764,14 +1785,16 @@ export type QuerySanityPageArgs = {
   title?: InputMaybe<StringQueryOperatorInput>;
   navigationTitle?: InputMaybe<StringQueryOperatorInput>;
   subtitle?: InputMaybe<StringQueryOperatorInput>;
-  mainImage?: InputMaybe<SanityCustomImageFilterInput>;
-  slug?: InputMaybe<SanitySlugFilterInput>;
   pageType?: InputMaybe<StringQueryOperatorInput>;
+  mainImage?: InputMaybe<SanityCustomImageFilterInput>;
+  photos?: InputMaybe<SanityCustomImageFilterListInput>;
+  slug?: InputMaybe<SanitySlugFilterInput>;
   categories?: InputMaybe<SanityCategoryFilterListInput>;
   template?: InputMaybe<StringQueryOperatorInput>;
   body?: InputMaybe<SanityBlockFilterListInput>;
   _rawBody?: InputMaybe<JsonQueryOperatorInput>;
   _rawMainImage?: InputMaybe<JsonQueryOperatorInput>;
+  _rawPhotos?: InputMaybe<JsonQueryOperatorInput>;
   _rawSlug?: InputMaybe<JsonQueryOperatorInput>;
   _rawCategories?: InputMaybe<JsonQueryOperatorInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
@@ -5457,6 +5480,7 @@ export type SanityPageFieldsEnum =
   | 'title'
   | 'navigationTitle'
   | 'subtitle'
+  | 'pageType'
   | 'mainImage____key'
   | 'mainImage____type'
   | 'mainImage___asset____id'
@@ -5526,10 +5550,79 @@ export type SanityPageFieldsEnum =
   | 'mainImage____rawAsset'
   | 'mainImage____rawHotspot'
   | 'mainImage____rawCrop'
+  | 'photos'
+  | 'photos____key'
+  | 'photos____type'
+  | 'photos___asset____id'
+  | 'photos___asset____type'
+  | 'photos___asset____createdAt'
+  | 'photos___asset____updatedAt'
+  | 'photos___asset____rev'
+  | 'photos___asset____key'
+  | 'photos___asset___originalFilename'
+  | 'photos___asset___label'
+  | 'photos___asset___title'
+  | 'photos___asset___description'
+  | 'photos___asset___altText'
+  | 'photos___asset___sha1hash'
+  | 'photos___asset___extension'
+  | 'photos___asset___mimeType'
+  | 'photos___asset___size'
+  | 'photos___asset___assetId'
+  | 'photos___asset___uploadId'
+  | 'photos___asset___path'
+  | 'photos___asset___url'
+  | 'photos___asset___metadata____key'
+  | 'photos___asset___metadata____type'
+  | 'photos___asset___metadata___lqip'
+  | 'photos___asset___metadata___blurHash'
+  | 'photos___asset___metadata___hasAlpha'
+  | 'photos___asset___metadata___isOpaque'
+  | 'photos___asset___metadata____rawLocation'
+  | 'photos___asset___metadata____rawDimensions'
+  | 'photos___asset___metadata____rawPalette'
+  | 'photos___asset___source____key'
+  | 'photos___asset___source____type'
+  | 'photos___asset___source___name'
+  | 'photos___asset___source___id'
+  | 'photos___asset___source___url'
+  | 'photos___asset____rawMetadata'
+  | 'photos___asset____rawSource'
+  | 'photos___asset___gatsbyImageData'
+  | 'photos___asset___id'
+  | 'photos___asset___parent___id'
+  | 'photos___asset___parent___children'
+  | 'photos___asset___children'
+  | 'photos___asset___children___id'
+  | 'photos___asset___children___children'
+  | 'photos___asset___internal___content'
+  | 'photos___asset___internal___contentDigest'
+  | 'photos___asset___internal___description'
+  | 'photos___asset___internal___fieldOwners'
+  | 'photos___asset___internal___ignoreType'
+  | 'photos___asset___internal___mediaType'
+  | 'photos___asset___internal___owner'
+  | 'photos___asset___internal___type'
+  | 'photos___hotspot____key'
+  | 'photos___hotspot____type'
+  | 'photos___hotspot___x'
+  | 'photos___hotspot___y'
+  | 'photos___hotspot___height'
+  | 'photos___hotspot___width'
+  | 'photos___crop____key'
+  | 'photos___crop____type'
+  | 'photos___crop___top'
+  | 'photos___crop___bottom'
+  | 'photos___crop___left'
+  | 'photos___crop___right'
+  | 'photos___alt'
+  | 'photos___caption'
+  | 'photos____rawAsset'
+  | 'photos____rawHotspot'
+  | 'photos____rawCrop'
   | 'slug____key'
   | 'slug____type'
   | 'slug___current'
-  | 'pageType'
   | 'categories'
   | 'categories____id'
   | 'categories____type'
@@ -5590,6 +5683,7 @@ export type SanityPageFieldsEnum =
   | 'body____rawChildren'
   | '_rawBody'
   | '_rawMainImage'
+  | '_rawPhotos'
   | '_rawSlug'
   | '_rawCategories'
   | 'id'
@@ -5730,14 +5824,16 @@ export type SanityPageFilterInput = {
   title?: InputMaybe<StringQueryOperatorInput>;
   navigationTitle?: InputMaybe<StringQueryOperatorInput>;
   subtitle?: InputMaybe<StringQueryOperatorInput>;
-  mainImage?: InputMaybe<SanityCustomImageFilterInput>;
-  slug?: InputMaybe<SanitySlugFilterInput>;
   pageType?: InputMaybe<StringQueryOperatorInput>;
+  mainImage?: InputMaybe<SanityCustomImageFilterInput>;
+  photos?: InputMaybe<SanityCustomImageFilterListInput>;
+  slug?: InputMaybe<SanitySlugFilterInput>;
   categories?: InputMaybe<SanityCategoryFilterListInput>;
   template?: InputMaybe<StringQueryOperatorInput>;
   body?: InputMaybe<SanityBlockFilterListInput>;
   _rawBody?: InputMaybe<JsonQueryOperatorInput>;
   _rawMainImage?: InputMaybe<JsonQueryOperatorInput>;
+  _rawPhotos?: InputMaybe<JsonQueryOperatorInput>;
   _rawSlug?: InputMaybe<JsonQueryOperatorInput>;
   _rawCategories?: InputMaybe<JsonQueryOperatorInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
@@ -6940,6 +7036,13 @@ export type GalleryListPageQueryQueryVariables = Exact<{
 
 
 export type GalleryListPageQueryQuery = { sanityPage?: { title?: string | null, _rawBody?: any | null, mainImage?: { alt?: string | null, asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null } | null } | null, allSanityGallery: { nodes: Array<{ id: string, title?: string | null, subtitle?: string | null, _rawDescription?: any | null, images?: Array<{ alt?: string | null, asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null } | null> | null, slug?: { current?: string | null } | null }> } };
+
+export type PortfolioPageQueryQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type PortfolioPageQueryQuery = { sanityPage?: { title?: string | null, subtitle?: string | null, _rawBody?: any | null, photos?: Array<{ alt?: string | null, asset?: { _id?: string | null, metadata?: { preview?: string | null } | null } | null, hotspot?: { height?: number | null, width?: number | null, x?: number | null, y?: number | null } | null, crop?: { bottom?: number | null, left?: number | null, right?: number | null, top?: number | null } | null } | null> | null } | null };
 
 export type PostQueryQueryVariables = Exact<{
   id: Scalars['String'];

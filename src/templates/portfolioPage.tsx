@@ -1,21 +1,22 @@
+import "./portfolioPage.css"
 import { graphql, PageProps } from "gatsby"
-import { SanityCustomImage, SanityGallery } from "../../graphql-types"
+import { SanityPage, SanityCustomImage } from "../../graphql-types"
 import BlockContent from "../components/blockContent"
-import Gallery from "react-photo-gallery"
-import { PhotoProps, RenderImageProps } from "react-photo-gallery"
-import "./gallery.css"
+import BackgroundImage from "../components/backgroundImage"
+import Image from "../components/image"
 import SimpleReactLightBox from "simple-react-lightbox"
 import { SRLWrapper } from "simple-react-lightbox"
+import Gallery from "react-photo-gallery"
+import { PhotoProps, RenderImageProps } from "react-photo-gallery"
 import { imageUrl, parseImageRef } from "gatsby-plugin-sanity-image"
-import Image from "../components/image"
 
-export const query = graphql`
-  query GalleryQuery($id: String!) {
-    sanityGallery(id: { eq: $id }) {
+export const simplePageQuery = graphql`
+  query PortfolioPageQuery($id: String!) {
+    sanityPage(id: { eq: $id }) {
       title
       subtitle
-      _rawDescription
-      images {
+      _rawBody
+      photos {
         ...ImageWithPreview
         alt
       }
@@ -23,19 +24,13 @@ export const query = graphql`
   }
 `
 
-type GalleryPageProps = PageProps<{ sanityGallery: SanityGallery }>
+type PortfolioPageProps = PageProps<{ sanityPage: SanityPage }>
 
-const GalleryPage = (props: GalleryPageProps) => {
-  const {
-    data: {
-      sanityGallery: { title, subtitle, _rawDescription, images },
-    },
-  } = props
-
+const PortfolioPage = ({ data: { sanityPage: page } }: PortfolioPageProps) => {
   type Photo = PhotoProps<{ image?: SanityCustomImage | null }>
 
   const photos: Photo[] =
-    images?.map((image) => {
+    page.photos?.map((image) => {
       const {
         dimensions: { width, height },
       } = parseImageRef(image?.asset?._id)
@@ -66,7 +61,6 @@ const GalleryPage = (props: GalleryPageProps) => {
   const targetRowHeight = (width: number) => {
     return width / 3
   }
-
   const lightboxOptions = {
     settings: {
       overlayColor: "black",
@@ -85,11 +79,11 @@ const GalleryPage = (props: GalleryPageProps) => {
 
   return (
     <SimpleReactLightBox>
-      <div className="gallery">
-        <h1 className="gallery-title">{title}</h1>
-        <h2 className="gallery-subtitle">{subtitle}</h2>
-        <div className="gallery-description">
-          <BlockContent value={_rawDescription} />
+      <BackgroundImage className="portfolio-page" image={page.mainImage!}>
+        <h1 className="portfolio-page-title">{page.title}</h1>
+        <h2 className="portfolio-page-subtitle">{page.subtitle}</h2>
+        <div className="portfolio-page-body">
+          <BlockContent value={page._rawBody} />
         </div>
         {photos && (
           <SRLWrapper options={lightboxOptions}>
@@ -100,9 +94,8 @@ const GalleryPage = (props: GalleryPageProps) => {
             ></Gallery>
           </SRLWrapper>
         )}
-      </div>
+      </BackgroundImage>
     </SimpleReactLightBox>
   )
 }
-
-export default GalleryPage
+export default PortfolioPage
