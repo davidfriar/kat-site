@@ -647,9 +647,11 @@ export type SanityCustomImage = SanityImageEntity & {
   crop?: Maybe<SanityImageCrop>;
   alt?: Maybe<Scalars['String']>;
   caption?: Maybe<Scalars['String']>;
+  sticker?: Maybe<SanitySticker>;
   _rawAsset?: Maybe<Scalars['JSON']>;
   _rawHotspot?: Maybe<Scalars['JSON']>;
   _rawCrop?: Maybe<Scalars['JSON']>;
+  _rawSticker?: Maybe<Scalars['JSON']>;
 };
 
 
@@ -664,6 +666,11 @@ export type SanityCustomImage_RawHotspotArgs = {
 
 
 export type SanityCustomImage_RawCropArgs = {
+  resolveReferences?: InputMaybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityCustomImage_RawStickerArgs = {
   resolveReferences?: InputMaybe<SanityResolveReferencesConfiguration>;
 };
 
@@ -1366,6 +1373,45 @@ export type SanitySpan = {
   text?: Maybe<Scalars['String']>;
 };
 
+export type SanitySticker = SanityDocument & Node & {
+  _id?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['Date']>;
+  _updatedAt?: Maybe<Scalars['Date']>;
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  image?: Maybe<SanityCustomImage>;
+  description?: Maybe<Scalars['String']>;
+  link?: Maybe<Scalars['String']>;
+  _rawImage?: Maybe<Scalars['JSON']>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+
+export type SanitySticker_CreatedAtArgs = {
+  formatString?: InputMaybe<Scalars['String']>;
+  fromNow?: InputMaybe<Scalars['Boolean']>;
+  difference?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+export type SanitySticker_UpdatedAtArgs = {
+  formatString?: InputMaybe<Scalars['String']>;
+  fromNow?: InputMaybe<Scalars['Boolean']>;
+  difference?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+export type SanitySticker_RawImageArgs = {
+  resolveReferences?: InputMaybe<SanityResolveReferencesConfiguration>;
+};
+
 export type SanityResolveReferencesConfiguration = {
   /** Max depth to resolve references to */
   maxDepth: Scalars['Int'];
@@ -1414,6 +1460,8 @@ export type Query = {
   allSanityImageAsset: SanityImageAssetConnection;
   sanitySiteInfo?: Maybe<SanitySiteInfo>;
   allSanitySiteInfo: SanitySiteInfoConnection;
+  sanitySticker?: Maybe<SanitySticker>;
+  allSanitySticker: SanityStickerConnection;
 };
 
 
@@ -1946,6 +1994,33 @@ export type QuerySanitySiteInfoArgs = {
 export type QueryAllSanitySiteInfoArgs = {
   filter?: InputMaybe<SanitySiteInfoFilterInput>;
   sort?: InputMaybe<SanitySiteInfoSortInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QuerySanityStickerArgs = {
+  _id?: InputMaybe<StringQueryOperatorInput>;
+  _type?: InputMaybe<StringQueryOperatorInput>;
+  _createdAt?: InputMaybe<DateQueryOperatorInput>;
+  _updatedAt?: InputMaybe<DateQueryOperatorInput>;
+  _rev?: InputMaybe<StringQueryOperatorInput>;
+  _key?: InputMaybe<StringQueryOperatorInput>;
+  name?: InputMaybe<StringQueryOperatorInput>;
+  image?: InputMaybe<SanityCustomImageFilterInput>;
+  description?: InputMaybe<StringQueryOperatorInput>;
+  link?: InputMaybe<StringQueryOperatorInput>;
+  _rawImage?: InputMaybe<JsonQueryOperatorInput>;
+  id?: InputMaybe<StringQueryOperatorInput>;
+  parent?: InputMaybe<NodeFilterInput>;
+  children?: InputMaybe<NodeFilterListInput>;
+  internal?: InputMaybe<InternalFilterInput>;
+};
+
+
+export type QueryAllSanityStickerArgs = {
+  filter?: InputMaybe<SanityStickerFilterInput>;
+  sort?: InputMaybe<SanityStickerSortInput>;
   skip?: InputMaybe<Scalars['Int']>;
   limit?: InputMaybe<Scalars['Int']>;
 };
@@ -4213,9 +4288,11 @@ export type SanityCustomImageFilterInput = {
   crop?: InputMaybe<SanityImageCropFilterInput>;
   alt?: InputMaybe<StringQueryOperatorInput>;
   caption?: InputMaybe<StringQueryOperatorInput>;
+  sticker?: InputMaybe<SanityStickerFilterInput>;
   _rawAsset?: InputMaybe<JsonQueryOperatorInput>;
   _rawHotspot?: InputMaybe<JsonQueryOperatorInput>;
   _rawCrop?: InputMaybe<JsonQueryOperatorInput>;
+  _rawSticker?: InputMaybe<JsonQueryOperatorInput>;
 };
 
 export type SanityImageAssetFilterInput = {
@@ -4332,6 +4409,24 @@ export type SanityImageCropFilterInput = {
   bottom?: InputMaybe<FloatQueryOperatorInput>;
   left?: InputMaybe<FloatQueryOperatorInput>;
   right?: InputMaybe<FloatQueryOperatorInput>;
+};
+
+export type SanityStickerFilterInput = {
+  _id?: InputMaybe<StringQueryOperatorInput>;
+  _type?: InputMaybe<StringQueryOperatorInput>;
+  _createdAt?: InputMaybe<DateQueryOperatorInput>;
+  _updatedAt?: InputMaybe<DateQueryOperatorInput>;
+  _rev?: InputMaybe<StringQueryOperatorInput>;
+  _key?: InputMaybe<StringQueryOperatorInput>;
+  name?: InputMaybe<StringQueryOperatorInput>;
+  image?: InputMaybe<SanityCustomImageFilterInput>;
+  description?: InputMaybe<StringQueryOperatorInput>;
+  link?: InputMaybe<StringQueryOperatorInput>;
+  _rawImage?: InputMaybe<JsonQueryOperatorInput>;
+  id?: InputMaybe<StringQueryOperatorInput>;
+  parent?: InputMaybe<NodeFilterInput>;
+  children?: InputMaybe<NodeFilterListInput>;
+  internal?: InputMaybe<InternalFilterInput>;
 };
 
 export type SanitySlugFilterInput = {
@@ -4485,9 +4580,42 @@ export type SanityGalleryFieldsEnum =
   | 'images___crop___right'
   | 'images___alt'
   | 'images___caption'
+  | 'images___sticker____id'
+  | 'images___sticker____type'
+  | 'images___sticker____createdAt'
+  | 'images___sticker____updatedAt'
+  | 'images___sticker____rev'
+  | 'images___sticker____key'
+  | 'images___sticker___name'
+  | 'images___sticker___image____key'
+  | 'images___sticker___image____type'
+  | 'images___sticker___image___alt'
+  | 'images___sticker___image___caption'
+  | 'images___sticker___image____rawAsset'
+  | 'images___sticker___image____rawHotspot'
+  | 'images___sticker___image____rawCrop'
+  | 'images___sticker___image____rawSticker'
+  | 'images___sticker___description'
+  | 'images___sticker___link'
+  | 'images___sticker____rawImage'
+  | 'images___sticker___id'
+  | 'images___sticker___parent___id'
+  | 'images___sticker___parent___children'
+  | 'images___sticker___children'
+  | 'images___sticker___children___id'
+  | 'images___sticker___children___children'
+  | 'images___sticker___internal___content'
+  | 'images___sticker___internal___contentDigest'
+  | 'images___sticker___internal___description'
+  | 'images___sticker___internal___fieldOwners'
+  | 'images___sticker___internal___ignoreType'
+  | 'images___sticker___internal___mediaType'
+  | 'images___sticker___internal___owner'
+  | 'images___sticker___internal___type'
   | 'images____rawAsset'
   | 'images____rawHotspot'
   | 'images____rawCrop'
+  | 'images____rawSticker'
   | 'slug____key'
   | 'slug____type'
   | 'slug___current'
@@ -4778,9 +4906,42 @@ export type SanityHomePageFieldsEnum =
   | 'mainImage___crop___right'
   | 'mainImage___alt'
   | 'mainImage___caption'
+  | 'mainImage___sticker____id'
+  | 'mainImage___sticker____type'
+  | 'mainImage___sticker____createdAt'
+  | 'mainImage___sticker____updatedAt'
+  | 'mainImage___sticker____rev'
+  | 'mainImage___sticker____key'
+  | 'mainImage___sticker___name'
+  | 'mainImage___sticker___image____key'
+  | 'mainImage___sticker___image____type'
+  | 'mainImage___sticker___image___alt'
+  | 'mainImage___sticker___image___caption'
+  | 'mainImage___sticker___image____rawAsset'
+  | 'mainImage___sticker___image____rawHotspot'
+  | 'mainImage___sticker___image____rawCrop'
+  | 'mainImage___sticker___image____rawSticker'
+  | 'mainImage___sticker___description'
+  | 'mainImage___sticker___link'
+  | 'mainImage___sticker____rawImage'
+  | 'mainImage___sticker___id'
+  | 'mainImage___sticker___parent___id'
+  | 'mainImage___sticker___parent___children'
+  | 'mainImage___sticker___children'
+  | 'mainImage___sticker___children___id'
+  | 'mainImage___sticker___children___children'
+  | 'mainImage___sticker___internal___content'
+  | 'mainImage___sticker___internal___contentDigest'
+  | 'mainImage___sticker___internal___description'
+  | 'mainImage___sticker___internal___fieldOwners'
+  | 'mainImage___sticker___internal___ignoreType'
+  | 'mainImage___sticker___internal___mediaType'
+  | 'mainImage___sticker___internal___owner'
+  | 'mainImage___sticker___internal___type'
   | 'mainImage____rawAsset'
   | 'mainImage____rawHotspot'
   | 'mainImage____rawCrop'
+  | 'mainImage____rawSticker'
   | 'backgroundImage____key'
   | 'backgroundImage____type'
   | 'backgroundImage___asset____id'
@@ -4847,9 +5008,42 @@ export type SanityHomePageFieldsEnum =
   | 'backgroundImage___crop___right'
   | 'backgroundImage___alt'
   | 'backgroundImage___caption'
+  | 'backgroundImage___sticker____id'
+  | 'backgroundImage___sticker____type'
+  | 'backgroundImage___sticker____createdAt'
+  | 'backgroundImage___sticker____updatedAt'
+  | 'backgroundImage___sticker____rev'
+  | 'backgroundImage___sticker____key'
+  | 'backgroundImage___sticker___name'
+  | 'backgroundImage___sticker___image____key'
+  | 'backgroundImage___sticker___image____type'
+  | 'backgroundImage___sticker___image___alt'
+  | 'backgroundImage___sticker___image___caption'
+  | 'backgroundImage___sticker___image____rawAsset'
+  | 'backgroundImage___sticker___image____rawHotspot'
+  | 'backgroundImage___sticker___image____rawCrop'
+  | 'backgroundImage___sticker___image____rawSticker'
+  | 'backgroundImage___sticker___description'
+  | 'backgroundImage___sticker___link'
+  | 'backgroundImage___sticker____rawImage'
+  | 'backgroundImage___sticker___id'
+  | 'backgroundImage___sticker___parent___id'
+  | 'backgroundImage___sticker___parent___children'
+  | 'backgroundImage___sticker___children'
+  | 'backgroundImage___sticker___children___id'
+  | 'backgroundImage___sticker___children___children'
+  | 'backgroundImage___sticker___internal___content'
+  | 'backgroundImage___sticker___internal___contentDigest'
+  | 'backgroundImage___sticker___internal___description'
+  | 'backgroundImage___sticker___internal___fieldOwners'
+  | 'backgroundImage___sticker___internal___ignoreType'
+  | 'backgroundImage___sticker___internal___mediaType'
+  | 'backgroundImage___sticker___internal___owner'
+  | 'backgroundImage___sticker___internal___type'
   | 'backgroundImage____rawAsset'
   | 'backgroundImage____rawHotspot'
   | 'backgroundImage____rawCrop'
+  | 'backgroundImage____rawSticker'
   | 'body'
   | 'body____key'
   | 'body____type'
@@ -5547,9 +5741,42 @@ export type SanityPageFieldsEnum =
   | 'mainImage___crop___right'
   | 'mainImage___alt'
   | 'mainImage___caption'
+  | 'mainImage___sticker____id'
+  | 'mainImage___sticker____type'
+  | 'mainImage___sticker____createdAt'
+  | 'mainImage___sticker____updatedAt'
+  | 'mainImage___sticker____rev'
+  | 'mainImage___sticker____key'
+  | 'mainImage___sticker___name'
+  | 'mainImage___sticker___image____key'
+  | 'mainImage___sticker___image____type'
+  | 'mainImage___sticker___image___alt'
+  | 'mainImage___sticker___image___caption'
+  | 'mainImage___sticker___image____rawAsset'
+  | 'mainImage___sticker___image____rawHotspot'
+  | 'mainImage___sticker___image____rawCrop'
+  | 'mainImage___sticker___image____rawSticker'
+  | 'mainImage___sticker___description'
+  | 'mainImage___sticker___link'
+  | 'mainImage___sticker____rawImage'
+  | 'mainImage___sticker___id'
+  | 'mainImage___sticker___parent___id'
+  | 'mainImage___sticker___parent___children'
+  | 'mainImage___sticker___children'
+  | 'mainImage___sticker___children___id'
+  | 'mainImage___sticker___children___children'
+  | 'mainImage___sticker___internal___content'
+  | 'mainImage___sticker___internal___contentDigest'
+  | 'mainImage___sticker___internal___description'
+  | 'mainImage___sticker___internal___fieldOwners'
+  | 'mainImage___sticker___internal___ignoreType'
+  | 'mainImage___sticker___internal___mediaType'
+  | 'mainImage___sticker___internal___owner'
+  | 'mainImage___sticker___internal___type'
   | 'mainImage____rawAsset'
   | 'mainImage____rawHotspot'
   | 'mainImage____rawCrop'
+  | 'mainImage____rawSticker'
   | 'photos'
   | 'photos____key'
   | 'photos____type'
@@ -5617,9 +5844,42 @@ export type SanityPageFieldsEnum =
   | 'photos___crop___right'
   | 'photos___alt'
   | 'photos___caption'
+  | 'photos___sticker____id'
+  | 'photos___sticker____type'
+  | 'photos___sticker____createdAt'
+  | 'photos___sticker____updatedAt'
+  | 'photos___sticker____rev'
+  | 'photos___sticker____key'
+  | 'photos___sticker___name'
+  | 'photos___sticker___image____key'
+  | 'photos___sticker___image____type'
+  | 'photos___sticker___image___alt'
+  | 'photos___sticker___image___caption'
+  | 'photos___sticker___image____rawAsset'
+  | 'photos___sticker___image____rawHotspot'
+  | 'photos___sticker___image____rawCrop'
+  | 'photos___sticker___image____rawSticker'
+  | 'photos___sticker___description'
+  | 'photos___sticker___link'
+  | 'photos___sticker____rawImage'
+  | 'photos___sticker___id'
+  | 'photos___sticker___parent___id'
+  | 'photos___sticker___parent___children'
+  | 'photos___sticker___children'
+  | 'photos___sticker___children___id'
+  | 'photos___sticker___children___children'
+  | 'photos___sticker___internal___content'
+  | 'photos___sticker___internal___contentDigest'
+  | 'photos___sticker___internal___description'
+  | 'photos___sticker___internal___fieldOwners'
+  | 'photos___sticker___internal___ignoreType'
+  | 'photos___sticker___internal___mediaType'
+  | 'photos___sticker___internal___owner'
+  | 'photos___sticker___internal___type'
   | 'photos____rawAsset'
   | 'photos____rawHotspot'
   | 'photos____rawCrop'
+  | 'photos____rawSticker'
   | 'slug____key'
   | 'slug____type'
   | 'slug___current'
@@ -5971,9 +6231,42 @@ export type SanityPostFieldsEnum =
   | 'mainImage___crop___right'
   | 'mainImage___alt'
   | 'mainImage___caption'
+  | 'mainImage___sticker____id'
+  | 'mainImage___sticker____type'
+  | 'mainImage___sticker____createdAt'
+  | 'mainImage___sticker____updatedAt'
+  | 'mainImage___sticker____rev'
+  | 'mainImage___sticker____key'
+  | 'mainImage___sticker___name'
+  | 'mainImage___sticker___image____key'
+  | 'mainImage___sticker___image____type'
+  | 'mainImage___sticker___image___alt'
+  | 'mainImage___sticker___image___caption'
+  | 'mainImage___sticker___image____rawAsset'
+  | 'mainImage___sticker___image____rawHotspot'
+  | 'mainImage___sticker___image____rawCrop'
+  | 'mainImage___sticker___image____rawSticker'
+  | 'mainImage___sticker___description'
+  | 'mainImage___sticker___link'
+  | 'mainImage___sticker____rawImage'
+  | 'mainImage___sticker___id'
+  | 'mainImage___sticker___parent___id'
+  | 'mainImage___sticker___parent___children'
+  | 'mainImage___sticker___children'
+  | 'mainImage___sticker___children___id'
+  | 'mainImage___sticker___children___children'
+  | 'mainImage___sticker___internal___content'
+  | 'mainImage___sticker___internal___contentDigest'
+  | 'mainImage___sticker___internal___description'
+  | 'mainImage___sticker___internal___fieldOwners'
+  | 'mainImage___sticker___internal___ignoreType'
+  | 'mainImage___sticker___internal___mediaType'
+  | 'mainImage___sticker___internal___owner'
+  | 'mainImage___sticker___internal___type'
   | 'mainImage____rawAsset'
   | 'mainImage____rawHotspot'
   | 'mainImage____rawCrop'
+  | 'mainImage____rawSticker'
   | 'categories'
   | 'categories____id'
   | 'categories____type'
@@ -6823,9 +7116,42 @@ export type SanitySiteInfoFieldsEnum =
   | 'logo___crop___right'
   | 'logo___alt'
   | 'logo___caption'
+  | 'logo___sticker____id'
+  | 'logo___sticker____type'
+  | 'logo___sticker____createdAt'
+  | 'logo___sticker____updatedAt'
+  | 'logo___sticker____rev'
+  | 'logo___sticker____key'
+  | 'logo___sticker___name'
+  | 'logo___sticker___image____key'
+  | 'logo___sticker___image____type'
+  | 'logo___sticker___image___alt'
+  | 'logo___sticker___image___caption'
+  | 'logo___sticker___image____rawAsset'
+  | 'logo___sticker___image____rawHotspot'
+  | 'logo___sticker___image____rawCrop'
+  | 'logo___sticker___image____rawSticker'
+  | 'logo___sticker___description'
+  | 'logo___sticker___link'
+  | 'logo___sticker____rawImage'
+  | 'logo___sticker___id'
+  | 'logo___sticker___parent___id'
+  | 'logo___sticker___parent___children'
+  | 'logo___sticker___children'
+  | 'logo___sticker___children___id'
+  | 'logo___sticker___children___children'
+  | 'logo___sticker___internal___content'
+  | 'logo___sticker___internal___contentDigest'
+  | 'logo___sticker___internal___description'
+  | 'logo___sticker___internal___fieldOwners'
+  | 'logo___sticker___internal___ignoreType'
+  | 'logo___sticker___internal___mediaType'
+  | 'logo___sticker___internal___owner'
+  | 'logo___sticker___internal___type'
   | 'logo____rawAsset'
   | 'logo____rawHotspot'
   | 'logo____rawCrop'
+  | 'logo____rawSticker'
   | '_rawLogo'
   | 'id'
   | 'parent___id'
@@ -6977,6 +7303,297 @@ export type SanitySiteInfoFilterInput = {
 
 export type SanitySiteInfoSortInput = {
   fields?: InputMaybe<Array<InputMaybe<SanitySiteInfoFieldsEnum>>>;
+  order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
+};
+
+export type SanityStickerConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<SanityStickerEdge>;
+  nodes: Array<SanitySticker>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  max?: Maybe<Scalars['Float']>;
+  min?: Maybe<Scalars['Float']>;
+  sum?: Maybe<Scalars['Float']>;
+  group: Array<SanityStickerGroupConnection>;
+};
+
+
+export type SanityStickerConnectionDistinctArgs = {
+  field: SanityStickerFieldsEnum;
+};
+
+
+export type SanityStickerConnectionMaxArgs = {
+  field: SanityStickerFieldsEnum;
+};
+
+
+export type SanityStickerConnectionMinArgs = {
+  field: SanityStickerFieldsEnum;
+};
+
+
+export type SanityStickerConnectionSumArgs = {
+  field: SanityStickerFieldsEnum;
+};
+
+
+export type SanityStickerConnectionGroupArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  field: SanityStickerFieldsEnum;
+};
+
+export type SanityStickerEdge = {
+  next?: Maybe<SanitySticker>;
+  node: SanitySticker;
+  previous?: Maybe<SanitySticker>;
+};
+
+export type SanityStickerFieldsEnum =
+  | '_id'
+  | '_type'
+  | '_createdAt'
+  | '_updatedAt'
+  | '_rev'
+  | '_key'
+  | 'name'
+  | 'image____key'
+  | 'image____type'
+  | 'image___asset____id'
+  | 'image___asset____type'
+  | 'image___asset____createdAt'
+  | 'image___asset____updatedAt'
+  | 'image___asset____rev'
+  | 'image___asset____key'
+  | 'image___asset___originalFilename'
+  | 'image___asset___label'
+  | 'image___asset___title'
+  | 'image___asset___description'
+  | 'image___asset___altText'
+  | 'image___asset___sha1hash'
+  | 'image___asset___extension'
+  | 'image___asset___mimeType'
+  | 'image___asset___size'
+  | 'image___asset___assetId'
+  | 'image___asset___uploadId'
+  | 'image___asset___path'
+  | 'image___asset___url'
+  | 'image___asset___metadata____key'
+  | 'image___asset___metadata____type'
+  | 'image___asset___metadata___lqip'
+  | 'image___asset___metadata___blurHash'
+  | 'image___asset___metadata___hasAlpha'
+  | 'image___asset___metadata___isOpaque'
+  | 'image___asset___metadata____rawLocation'
+  | 'image___asset___metadata____rawDimensions'
+  | 'image___asset___metadata____rawPalette'
+  | 'image___asset___source____key'
+  | 'image___asset___source____type'
+  | 'image___asset___source___name'
+  | 'image___asset___source___id'
+  | 'image___asset___source___url'
+  | 'image___asset____rawMetadata'
+  | 'image___asset____rawSource'
+  | 'image___asset___gatsbyImageData'
+  | 'image___asset___id'
+  | 'image___asset___parent___id'
+  | 'image___asset___parent___children'
+  | 'image___asset___children'
+  | 'image___asset___children___id'
+  | 'image___asset___children___children'
+  | 'image___asset___internal___content'
+  | 'image___asset___internal___contentDigest'
+  | 'image___asset___internal___description'
+  | 'image___asset___internal___fieldOwners'
+  | 'image___asset___internal___ignoreType'
+  | 'image___asset___internal___mediaType'
+  | 'image___asset___internal___owner'
+  | 'image___asset___internal___type'
+  | 'image___hotspot____key'
+  | 'image___hotspot____type'
+  | 'image___hotspot___x'
+  | 'image___hotspot___y'
+  | 'image___hotspot___height'
+  | 'image___hotspot___width'
+  | 'image___crop____key'
+  | 'image___crop____type'
+  | 'image___crop___top'
+  | 'image___crop___bottom'
+  | 'image___crop___left'
+  | 'image___crop___right'
+  | 'image___alt'
+  | 'image___caption'
+  | 'image___sticker____id'
+  | 'image___sticker____type'
+  | 'image___sticker____createdAt'
+  | 'image___sticker____updatedAt'
+  | 'image___sticker____rev'
+  | 'image___sticker____key'
+  | 'image___sticker___name'
+  | 'image___sticker___image____key'
+  | 'image___sticker___image____type'
+  | 'image___sticker___image___alt'
+  | 'image___sticker___image___caption'
+  | 'image___sticker___image____rawAsset'
+  | 'image___sticker___image____rawHotspot'
+  | 'image___sticker___image____rawCrop'
+  | 'image___sticker___image____rawSticker'
+  | 'image___sticker___description'
+  | 'image___sticker___link'
+  | 'image___sticker____rawImage'
+  | 'image___sticker___id'
+  | 'image___sticker___parent___id'
+  | 'image___sticker___parent___children'
+  | 'image___sticker___children'
+  | 'image___sticker___children___id'
+  | 'image___sticker___children___children'
+  | 'image___sticker___internal___content'
+  | 'image___sticker___internal___contentDigest'
+  | 'image___sticker___internal___description'
+  | 'image___sticker___internal___fieldOwners'
+  | 'image___sticker___internal___ignoreType'
+  | 'image___sticker___internal___mediaType'
+  | 'image___sticker___internal___owner'
+  | 'image___sticker___internal___type'
+  | 'image____rawAsset'
+  | 'image____rawHotspot'
+  | 'image____rawCrop'
+  | 'image____rawSticker'
+  | 'description'
+  | 'link'
+  | '_rawImage'
+  | 'id'
+  | 'parent___id'
+  | 'parent___parent___id'
+  | 'parent___parent___parent___id'
+  | 'parent___parent___parent___children'
+  | 'parent___parent___children'
+  | 'parent___parent___children___id'
+  | 'parent___parent___children___children'
+  | 'parent___parent___internal___content'
+  | 'parent___parent___internal___contentDigest'
+  | 'parent___parent___internal___description'
+  | 'parent___parent___internal___fieldOwners'
+  | 'parent___parent___internal___ignoreType'
+  | 'parent___parent___internal___mediaType'
+  | 'parent___parent___internal___owner'
+  | 'parent___parent___internal___type'
+  | 'parent___children'
+  | 'parent___children___id'
+  | 'parent___children___parent___id'
+  | 'parent___children___parent___children'
+  | 'parent___children___children'
+  | 'parent___children___children___id'
+  | 'parent___children___children___children'
+  | 'parent___children___internal___content'
+  | 'parent___children___internal___contentDigest'
+  | 'parent___children___internal___description'
+  | 'parent___children___internal___fieldOwners'
+  | 'parent___children___internal___ignoreType'
+  | 'parent___children___internal___mediaType'
+  | 'parent___children___internal___owner'
+  | 'parent___children___internal___type'
+  | 'parent___internal___content'
+  | 'parent___internal___contentDigest'
+  | 'parent___internal___description'
+  | 'parent___internal___fieldOwners'
+  | 'parent___internal___ignoreType'
+  | 'parent___internal___mediaType'
+  | 'parent___internal___owner'
+  | 'parent___internal___type'
+  | 'children'
+  | 'children___id'
+  | 'children___parent___id'
+  | 'children___parent___parent___id'
+  | 'children___parent___parent___children'
+  | 'children___parent___children'
+  | 'children___parent___children___id'
+  | 'children___parent___children___children'
+  | 'children___parent___internal___content'
+  | 'children___parent___internal___contentDigest'
+  | 'children___parent___internal___description'
+  | 'children___parent___internal___fieldOwners'
+  | 'children___parent___internal___ignoreType'
+  | 'children___parent___internal___mediaType'
+  | 'children___parent___internal___owner'
+  | 'children___parent___internal___type'
+  | 'children___children'
+  | 'children___children___id'
+  | 'children___children___parent___id'
+  | 'children___children___parent___children'
+  | 'children___children___children'
+  | 'children___children___children___id'
+  | 'children___children___children___children'
+  | 'children___children___internal___content'
+  | 'children___children___internal___contentDigest'
+  | 'children___children___internal___description'
+  | 'children___children___internal___fieldOwners'
+  | 'children___children___internal___ignoreType'
+  | 'children___children___internal___mediaType'
+  | 'children___children___internal___owner'
+  | 'children___children___internal___type'
+  | 'children___internal___content'
+  | 'children___internal___contentDigest'
+  | 'children___internal___description'
+  | 'children___internal___fieldOwners'
+  | 'children___internal___ignoreType'
+  | 'children___internal___mediaType'
+  | 'children___internal___owner'
+  | 'children___internal___type'
+  | 'internal___content'
+  | 'internal___contentDigest'
+  | 'internal___description'
+  | 'internal___fieldOwners'
+  | 'internal___ignoreType'
+  | 'internal___mediaType'
+  | 'internal___owner'
+  | 'internal___type';
+
+export type SanityStickerGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<SanityStickerEdge>;
+  nodes: Array<SanitySticker>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  max?: Maybe<Scalars['Float']>;
+  min?: Maybe<Scalars['Float']>;
+  sum?: Maybe<Scalars['Float']>;
+  group: Array<SanityStickerGroupConnection>;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+
+export type SanityStickerGroupConnectionDistinctArgs = {
+  field: SanityStickerFieldsEnum;
+};
+
+
+export type SanityStickerGroupConnectionMaxArgs = {
+  field: SanityStickerFieldsEnum;
+};
+
+
+export type SanityStickerGroupConnectionMinArgs = {
+  field: SanityStickerFieldsEnum;
+};
+
+
+export type SanityStickerGroupConnectionSumArgs = {
+  field: SanityStickerFieldsEnum;
+};
+
+
+export type SanityStickerGroupConnectionGroupArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  field: SanityStickerFieldsEnum;
+};
+
+export type SanityStickerSortInput = {
+  fields?: InputMaybe<Array<InputMaybe<SanityStickerFieldsEnum>>>;
   order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
 };
 

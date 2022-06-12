@@ -29,6 +29,7 @@
 
 .post-body figure img {
   width: 100%;
+  display: block;
 }
 
 .post-body figure div {
@@ -42,4 +43,19 @@
 .post-date {
   text-align: right;
   padding: 0 2rem;
+}
+
+.post-body .figure-image {
+  position: relative;
+}
+
+.post-body figure .sticker {
+  --sticker-margin: min(2vw, calc(var(--max-page-width) / 50));
+  position: absolute;
+  width: min(25vw, calc(var(--max-page-width) / 4));
+  bottom: var(--sticker-margin);
+  right: var(--sticker-margin);
+}
+.post-body figure .sticker img {
+  display: block;
 }
