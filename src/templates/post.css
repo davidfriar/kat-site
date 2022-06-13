@@ -54,7 +54,7 @@
   position: absolute;
   width: min(25vw, calc(var(--max-page-width) / 4));
   bottom: var(--sticker-margin);
-  right: var(--sticker-margin);
+  left: var(--sticker-margin);
 }
 .post-body figure .sticker img {
   display: block;
