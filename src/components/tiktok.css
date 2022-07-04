@@ -1,0 +1,24 @@
+.tiktok {
+  background-color: var(--light-bg-color);
+  width: 324px;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+
+.tiktok blockquote {
+  border-left: none;
+  border-width: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.tiktok iframe {
+  border-radius: 8px;
+  border-width: 0px;
+}
+
+@media screen and (min-width: 560px) {
+  .tiktok {
+    width: 542px;
+  }
+}

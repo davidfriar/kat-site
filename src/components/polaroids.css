@@ -1,0 +1,92 @@
+.polaroids {
+  padding-top: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  --number-of-columns: 1;
+}
+
+@media screen and (min-width: 600px) {
+  .polaroids {
+    --number-of-columns: 2;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .polaroids {
+    --number-of-columns: 3;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .polaroids {
+    --number-of-columns: 4;
+  }
+}
+
+.polaroids a {
+  text-decoration: none;
+}
+
+.polaroids a:hover {
+  color: inherit;
+}
+
+.polaroids ul {
+  display: grid;
+  grid-template-columns: repeat(var(--number-of-columns), 1fr);
+  justify-items: center;
+  list-style: none;
+}
+
+.polaroids li {
+  transform: translate(0px, 0px) rotate(0, deg);
+  transition: transform 500ms ease-in-out;
+}
+
+.polaroids li:nth-child(2n + 1) {
+  transform: translate(10px, 8px) rotate(-2deg);
+  transition: transform 300ms ease-in-out;
+}
+.polaroids li:nth-child(3n + 2) {
+  transform: translate(-5px, -3px) rotate(1deg);
+  transition: transform 300ms ease-in-out;
+}
+.polaroids li:nth-child(5n + 3) {
+  transform: translate(15px, -4px) rotate(-3deg);
+  transition: transform 300ms ease-in-out;
+}
+.polaroids li:nth-child(7n + 5) {
+  transform: translate(-8px, 12px) rotate(6deg);
+  transition: transform 300ms ease-in-out;
+}
+.polaroids li:nth-child(11n + 7) {
+  transform: translate(5px, -2px) rotate(4deg);
+  transition: transform 300ms ease-in-out;
+}
+
+.polaroids li:hover {
+  z-index: 10;
+  transform: scale(1.05, 1.05);
+  transition: transform 300ms ease-in-out;
+}
+
+.polaroids li:nth-child(2n + 1):hover {
+  transform: scale(1.05, 1.05) translate(10px, 8px) rotate(-2deg);
+  transition: transform 300ms ease-in-out;
+}
+.polaroids li:nth-child(3n + 2):hover {
+  transform: scale(1.05, 1.05) translate(-5px, -3px) rotate(1deg);
+  transition: transform 300ms ease-in-out;
+}
+.polaroids li:nth-child(5n + 3):hover {
+  transform: scale(1.05, 1.05) translate(15px, -4px) rotate(-3deg);
+  transition: transform 300ms ease-in-out;
+}
+.polaroids li:nth-child(7n + 5):hover {
+  transform: scale(1.05, 1.05) translate(-8px, 12px) rotate(6deg);
+  transition: transform 300ms ease-in-out;
+}
+.polaroids li:nth-child(11n + 7):hover {
+  transform: scale(1.05, 1.05) translate(5px, -2px) rotate(4deg);
+  transition: transform 300ms ease-in-out;
+}

@@ -1,0 +1,8 @@
+.spotify-playlist iframe {
+  margin: 0px auto;
+  display: block;
+}
+
+.spotify-playlist {
+  margin-bottom: 1rem;
+}

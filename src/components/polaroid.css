@@ -1,0 +1,22 @@
+.polaroid {
+  padding: 15px 15px 0px 15px;
+  padding-bottom: 0px;
+  background-color: rgb(242, 241, 230);
+  width: 250px;
+  box-shadow: 3px 3px 15px 5px rgba(80, 50, 11, 0.8);
+}
+
+.polaroid:hover {
+}
+
+.polaroid figcaption {
+  text-decoration: none;
+  text-align: center;
+  padding: 15px 0px;
+  font-size: 1rem;
+}
+
+.polaroid img {
+  object-fit: cover;
+  display: block;
+}

@@ -4,6 +4,7 @@ import BlockContent from "../components/blockContent"
 import Coverflow from "../components/coverflow"
 import CardList from "../components/cardList"
 import BackgroundImage from "../components/backgroundImage"
+import Polaroids from "../components/polaroids"
 import "./categoryPage.css"
 
 export const categoryPageQuery = graphql`
@@ -32,6 +33,7 @@ export const categoryPageQuery = graphql`
         mainImage {
           ...ImageWithPreview
           alt
+          caption
         }
       }
     }
@@ -58,6 +60,7 @@ const CategoryPage = (props: CategoryPageProps) => {
     : {
         ["coverflow"]: Coverflow,
         ["cardlist"]: CardList,
+        ["polaroids"]: Polaroids,
       }[template as string] || CardList
 
   return (

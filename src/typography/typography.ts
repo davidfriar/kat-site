@@ -25,6 +25,9 @@ const typography = new Typography({
       },
       footer: scale(-2 / 5),
       figcaption: scale(-1 / 5),
+      [".polaroid"]: {
+        fontFamily: "Permanent Marker",
+      },
       [BreakPoints.MOBILE_MEDIA_QUERY]: {
         html: {
           fontSize: `${(15 / 16) * 100}%`,

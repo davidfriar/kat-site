@@ -5,6 +5,8 @@ import {
 } from "@portabletext/react"
 import { Figure } from "../components/figure"
 import { Link } from "gatsby"
+import { Tiktok } from "../components/tiktok"
+import { Playlist } from "../components/playlist"
 
 const InternalLink: PortableTextMarkComponent = ({ children, value }) => {
   const {
@@ -23,6 +25,8 @@ const InternalLink: PortableTextMarkComponent = ({ children, value }) => {
 const components = {
   types: {
     customImage: Figure,
+    tiktok: Tiktok,
+    playlist: Playlist,
   },
   marks: {
     internalLink: InternalLink,

@@ -40,6 +40,7 @@ const config: GatsbyConfig = {
           `Exo\:700`,
           `Open Sans\:400,400i,700,700i`,
           `Averia Sans Libre\:400`,
+          `Permanent Marker\:400`,
         ],
         display: "swap",
       },

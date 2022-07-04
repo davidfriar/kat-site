@@ -107,14 +107,14 @@ nav a:hover {
   top: 3px;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 1200px) {
   .nav-toggle-label {
     display: none;
   }
 
   header {
     display: grid;
-    grid-template-columns: 1fr auto minmax(650px, 1fr) 1fr;
+    grid-template-columns: 1fr auto minmax(1000px, 1fr) 1fr;
   }
 
   .logo {
