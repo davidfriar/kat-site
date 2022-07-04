@@ -13,6 +13,10 @@ const onCreateWebpackConfig: GatsbyNode["onCreateWebpackConfig"] = ({
             test: /react-coverflow/,
             use: loaders.null(),
           },
+          {
+            test: /react-tiktok/,
+            use: loaders.null(),
+          },
         ],
       },
     })

@@ -1,5 +1,5 @@
 import { TikTok as T } from "react-tiktok"
-import './tiktok.css'
+import "./tiktok.css"
 
 type TiktokProps = {
   value: {
@@ -7,5 +7,7 @@ type TiktokProps = {
   }
 }
 export const Tiktok = ({ value }: TiktokProps) => {
-  return <div className="tiktok">{value.url && <T url={value.url} />}</div>
+  if (typeof window !== "undefined") {
+    return <div className="tiktok">{value.url && <T url={value.url} />}</div>
+  }
 }
