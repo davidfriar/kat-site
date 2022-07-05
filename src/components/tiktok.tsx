@@ -9,5 +9,7 @@ type TiktokProps = {
 export const Tiktok = ({ value }: TiktokProps) => {
   if (typeof window !== "undefined") {
     return <div className="tiktok">{value.url && <T url={value.url} />}</div>
+  } else {
+    return null
   }
 }
